@@ -6,46 +6,76 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "appAssociation": "AUTO",  // required for Dynamic Links (default is AUTO if not specified)
+
     "rewrites": [
       // {
-      //   "source": "**",
-      //   "destination": "/index.html"
-      // }
+      //    "source": "**",
+      //    "destination": "/en/index.html",
+      //    "dynamicLinks": true
+
+      // },
       {
         "source": "/ar{,/**}",
-        "destination": "/ar/index.html"
+        "destination": "/ar/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/de{,/**}",
-        "destination": "/de/index.html"
+        "destination": "/de/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/en{,/**}",
-        "destination": "/en/index.html"
+        "destination": "/en/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/es{,/**}",
-        "destination": "/es/index.html"
+        "destination": "/es/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/fr{,/**}",
-        "destination": "/fr/index.html"
+        "destination": "/fr/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/pt{,/**}",
-        "destination": "/pt/index.html"
+        "destination": "/pt/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/ru{,/**}",
-        "destination": "/ru/index.html"
+        "destination": "/ru/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/sv{,/**}",
-        "destination": "/sv/index.html"
+        "destination": "/sv/index.html",
+        "dynamicLinks": true
+
       },
       {
         "source": "/zh{,/**}",
-        "destination": "/zh/index.html"
+        "destination": "/zh/index.html",
+        "dynamicLinks": true
+
+      }
+    ]
+    ,
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/ar",
+        "type": 301
       }
     ]
   }

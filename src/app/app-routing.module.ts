@@ -11,7 +11,8 @@ const routes: Routes = [
   // authentication component
   { path:'', pathMatch:'full', redirectTo:'signin'},
 
-  { path:'home',component: AppComponent,canActivate:[NotAuthGuard] },
+  //{ path:'', pathMatch:'full', redirectTo:'home' ,component: AppComponent,canActivate:[AuthGuard] },
+  { path:'home' ,component: AppComponent,canActivate:[AuthGuard] },
 
   { path:'signup',component: SignUpComponent,canActivate:[NotAuthGuard] },
   { path:'signin',component: SignInComponent,canActivate:[NotAuthGuard] },
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
