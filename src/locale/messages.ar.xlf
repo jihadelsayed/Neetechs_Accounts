@@ -20,6 +20,8 @@
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
+        <target>تسجيل الدخول</target>
+
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">8</context>
@@ -27,6 +29,7 @@
       </trans-unit>
       <trans-unit id="4879517228803151475" datatype="html">
         <source>Email Address</source>
+        <target>البريد الالكتروني</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">13</context>
@@ -35,6 +38,8 @@
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
+        <target>كلمة السر</target>
+
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">21</context>
@@ -47,6 +52,7 @@
       </trans-unit>
       <trans-unit id="6666809212157643815" datatype="html">
         <source>Incorrect email or password.</source>
+        <target>الايميل او كلمة السر خاطئة</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">29</context>
@@ -54,6 +60,7 @@
       </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
         <source>Login</source>
+        <target>التسجيل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">32</context>
@@ -61,6 +68,7 @@
       </trans-unit>
       <trans-unit id="6885250605670292687" datatype="html">
         <source> Forgot Password ? </source>
+        <target>هل نسيت كلمة المرور?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">35,38</context>
@@ -68,6 +76,7 @@
       </trans-unit>
       <trans-unit id="8345740815869799385" datatype="html">
         <source>Don&apos;t have an account yet?</source>
+        <target>لاتملك حساب الى الان?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-in/sign-in.component.html</context>
           <context context-type="linenumber">41</context>
@@ -75,6 +84,7 @@
       </trans-unit>
       <trans-unit id="712595382625158266" datatype="html">
         <source> Get your free account now. </source>
+        <target>احصل على حساب مجاني الان.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">52,54</context>
@@ -82,6 +92,7 @@
       </trans-unit>
       <trans-unit id="599985632256450691" datatype="html">
         <source> Let’s get you all set up so you can verify your personal account and begin setting up your profile. </source>
+        <target>دعنا نجهزك بالكامل حتى تتمكن من التحقق من حسابك الشخصي والبدء في إعداد ملفك الشخصي. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">56,58</context>
@@ -89,13 +100,31 @@
       </trans-unit>
       <trans-unit id="3615095021665444450" datatype="html">
         <source>Select type of account</source>
+        <target>اختر نوع الحساب</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
+        <trans-unit id="3735282484002147955" datatype="html">
+        <source> client </source>
+        <target>العميل</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">69,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1994145069970587001" datatype="html">
+        <source> worker </source>
+        <target>العامل</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">79,81</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6028371114637047813" datatype="html">
         <source>First Name</source>
+        <target>الاسم الاول</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">88</context>
@@ -103,6 +132,7 @@
       </trans-unit>
       <trans-unit id="6987388674475678589" datatype="html">
         <source>John</source>
+        <target>جهاد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">89</context>
@@ -111,6 +141,7 @@
       </trans-unit>
       <trans-unit id="3586674587150281199" datatype="html">
         <source>Last name</source>
+        <target>الاسم الثاني</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">93</context>
@@ -118,6 +149,7 @@
       </trans-unit>
       <trans-unit id="2967536641774500467" datatype="html">
         <source>Snow</source>
+        <target>السيد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">94</context>
@@ -126,6 +158,7 @@
       </trans-unit>
       <trans-unit id="8121141462865337916" datatype="html">
         <source>Phone number</source>
+        <target>رقم الهاتف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">98</context>
@@ -133,6 +166,7 @@
       </trans-unit>
       <trans-unit id="271055391620534257" datatype="html">
         <source>XXX-XX-XXXX-XXX</source>
+
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">99</context>
@@ -141,6 +175,7 @@
       </trans-unit>
       <trans-unit id="3967269098753656610" datatype="html">
         <source>Email address</source>
+        <target>الحساب الالكتروني</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">103</context>
@@ -148,6 +183,7 @@
       </trans-unit>
       <trans-unit id="3497450301123657458" datatype="html">
         <source>johnsnow@example.com</source>
+        <target>jihad@neetechs.com</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">104</context>
@@ -156,6 +192,7 @@
       </trans-unit>
       <trans-unit id="2772023564304193657" datatype="html">
         <source>Enter your password</source>
+        <target>ادخل كلمة المرور</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">109</context>
@@ -168,6 +205,7 @@
       </trans-unit>
       <trans-unit id="3782563238994348625" datatype="html">
         <source>Confirm password</source>
+        <target>التحقق من كلمة المرور</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">113</context>
@@ -175,6 +213,7 @@
       </trans-unit>
       <trans-unit id="8775533412036512292" datatype="html">
         <source>Sign Up </source>
+        <target>التسجيل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">119</context>

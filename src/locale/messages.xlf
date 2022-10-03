@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-PI" datatype="plaintext" original="ng2.template">
+  <file source-language="ar" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="1737753151350322492" datatype="html">
         <source><x id="PH" equiv-text="this.title"/></source>
@@ -91,6 +91,20 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3735282484002147955" datatype="html">
+        <source> client </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">69,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1994145069970587001" datatype="html">
+        <source> worker </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/authentication/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">79,81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6028371114637047813" datatype="html">
