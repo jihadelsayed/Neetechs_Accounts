@@ -14,13 +14,15 @@ import { UserService } from './authentication/services/user.service';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './authentication/services/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

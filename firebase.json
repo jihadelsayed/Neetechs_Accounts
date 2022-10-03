@@ -1,15 +1,51 @@
 {
   "hosting": {
-    "public": "dist\\nee-techs\\en-US",
+    "public": "dist/nee-techs/",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
     "rewrites": [
+      // {
+      //   "source": "**",
+      //   "destination": "/index.html"
+      // }
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/ar{,/**}",
+        "destination": "/ar/index.html"
+      },
+      {
+        "source": "/de{,/**}",
+        "destination": "/de/index.html"
+      },
+      {
+        "source": "/en{,/**}",
+        "destination": "/en/index.html"
+      },
+      {
+        "source": "/es{,/**}",
+        "destination": "/es/index.html"
+      },
+      {
+        "source": "/fr{,/**}",
+        "destination": "/fr/index.html"
+      },
+      {
+        "source": "/pt{,/**}",
+        "destination": "/pt/index.html"
+      },
+      {
+        "source": "/ru{,/**}",
+        "destination": "/ru/index.html"
+      },
+      {
+        "source": "/sv{,/**}",
+        "destination": "/sv/index.html"
+      },
+      {
+        "source": "/zh{,/**}",
+        "destination": "/zh/index.html"
       }
     ]
   }
