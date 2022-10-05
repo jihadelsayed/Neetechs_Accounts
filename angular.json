@@ -5,16 +5,17 @@
   "projects": {
     "NeeTechs": {
       "i18n": {
-        "sourceLocale":"ar",
+        "sourceLocale":"en-US",
         "locales": {
-          "en": "src/locale/messages.en.xlf",
+          "ar": "src/locale/messages.ar.xlf",
           "es": "src/locale/messages.es.xlf",
           "pt": "src/locale/messages.pt.xlf",
           "de": "src/locale/messages.de.xlf",
           "ru": "src/locale/messages.ru.xlf",
           "sv": "src/locale/messages.sv.xlf",
           "zh": "src/locale/messages.zh.xlf",
-          "fr": "src/locale/messages.fr.xlf"
+          "fr": "src/locale/messages.fr.xlf",
+          "en": "src/locale/messages.xlf"
         }
       },
       "projectType": "application",
@@ -26,20 +27,23 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            // for build multiply localization
             "localize":[
+              "ar",
+              "es",
+              "pt",
+              "ar",
+              "de",
+              "ru",
+              "sv",
+              "zh",
+              "fr",
               "en"
-              // "es",
-              // "pt",
-              // "ar",
-              // "de",
-              // "ru",
-              // "sv",
-              // "zh",
-              // "fr"
             ],
             "outputPath": "dist/nee-techs",
             "index": "src/index.html",
@@ -61,27 +65,6 @@
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
             "es":{
               "localize":[
                 "es"
@@ -127,6 +110,28 @@
                 "fr"
             ]
             },
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -143,6 +148,9 @@
           "configurations": {
             "production": {
               "browserTarget": "NeeTechs:build:production"
+            },
+            "development": {
+              "browserTarget": "NeeTechs:build:development"
             },
             "ar": {
               "browserTarget": "NeeTechs:build:ar"
@@ -171,9 +179,6 @@
             },
             "fr": {
               "browserTarget": "NeeTechs:build:fr"
-            },
-            "development": {
-              "browserTarget": "NeeTechs:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -203,7 +208,15 @@
             ],
             "scripts": []
           }
+        },
+        // adding folder
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
+
       }
     }
   }

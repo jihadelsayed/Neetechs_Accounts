@@ -16,6 +16,7 @@ import { AuthGuard } from './authentication/services/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { JwtInterceptor } from './authentication/Jwt-interceptor.interceptor';
+import { AuthorizationComponent } from './authorization/authorization.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { JwtInterceptor } from './authentication/Jwt-interceptor.interceptor';
     AuthenticationComponent,
     SignInComponent,
     SignUpComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AuthorizationComponent
   ],
   imports: [
     BrowserModule,

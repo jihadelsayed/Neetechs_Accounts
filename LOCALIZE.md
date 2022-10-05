@@ -100,3 +100,13 @@ rename it to messages.fr.xlf
   ... 
 }
   ```
+
+To build use:
+```
+  ng build --configuration
+```
+
+To deploy:
+```
+firebase deploy
+```
