@@ -13,6 +13,9 @@ const routes: Routes = [
 
   //{ path:'', pathMatch:'full', redirectTo:'home' ,component: AppComponent,canActivate:[AuthGuard] },
   { path:'home' ,component: AppComponent,canActivate:[AuthGuard] },
+  { path:'Profile' ,component: AppComponent,canActivate:[AuthGuard] },
+  { path:'Profile/:site_id' ,component: AppComponent,canActivate:[AuthGuard] },
+  { path:'complete' ,component: AppComponent,canActivate:[AuthGuard] },
 
   { path:'signup',component: SignUpComponent,canActivate:[NotAuthGuard] },
   { path:'signin',component: SignInComponent,canActivate:[NotAuthGuard] },
