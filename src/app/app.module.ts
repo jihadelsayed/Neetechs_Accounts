@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { JwtInterceptor } from './authentication/Jwt-interceptor.interceptor';
 import { AuthorizationComponent } from './authorization/authorization.component';
+import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthorizationComponent } from './authorization/authorization.component'
     SignInComponent,
     SignUpComponent,
     NotFoundComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    GetCredentialComponent
   ],
   imports: [
     BrowserModule,

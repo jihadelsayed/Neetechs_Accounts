@@ -8,6 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'NeeTechs';
+
   constructor(private titleService: Title){
     this.titleService.setTitle($localize`${this.title}`);
   }
