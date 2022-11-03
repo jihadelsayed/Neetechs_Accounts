@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
@@ -15,5 +16,14 @@
 <body class="mat-typography">
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+<!-- <script>
+
+  document.defaultView.top.postMessage({
+      type:"credential",
+      getToken: localStorage.getItem("userToken"),
+      getUserInfo: localStorage.getItem("UserInfo")
+    } // get it from url
+    , "http://localhost:4200/")
+</script> -->
 </body>
 </html>
