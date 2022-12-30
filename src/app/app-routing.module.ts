@@ -1,3 +1,6 @@
+import { VerifyEmailComponent } from './authentication/verify-email/verify-email.component';
+import { ResetPasswordConfirmComponent } from './authentication/reset-password-confirm/reset-password-confirm.component';
+import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { SignOutComponent } from './authentication/sign-out/sign-out.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +18,9 @@ const routes: Routes = [
   { path:'signUp',component: SignUpComponent },
   { path:'signIn',component: SignInComponent },
   { path:'signOut',component: SignOutComponent },
+  { path:'resetPassword',component: ResetPasswordComponent },
+  { path:'resetPasswordConfirm',component: ResetPasswordConfirmComponent },
+  { path:'verifyEmail',component: VerifyEmailComponent },
   { path:'**',component: SignInComponent,canActivate:[NotAuthGuard] },
 ];
 

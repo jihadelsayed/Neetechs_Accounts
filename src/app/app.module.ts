@@ -13,10 +13,16 @@ import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './authentication/services/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { JwtInterceptor } from './authentication/Jwt-interceptor.interceptor';
+import { JwtInterceptor } from './authorization/Jwt-interceptor.interceptor';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
 import { SignOutComponent } from './authentication/sign-out/sign-out.component';
+import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
+import { VerifyEmailComponent } from './authentication/verify-email/verify-email.component';
+import { ResetPasswordConfirmComponent } from './authentication/reset-password-confirm/reset-password-confirm.component';
+import { FacebookComponent } from './authentication/sign-in/facebook/facebook.component';
+import { GoogleComponent } from './authentication/sign-in/google/google.component';
+import { BlockchainComponent } from './authentication/sign-in/blockchain/blockchain.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,13 @@ import { SignOutComponent } from './authentication/sign-out/sign-out.component';
     NotFoundComponent,
     AuthorizationComponent,
     GetCredentialComponent,
-    SignOutComponent
+    SignOutComponent,
+    ResetPasswordComponent,
+    VerifyEmailComponent,
+    ResetPasswordConfirmComponent,
+    FacebookComponent,
+    GoogleComponent,
+    BlockchainComponent
   ],
   imports: [
     BrowserModule,
