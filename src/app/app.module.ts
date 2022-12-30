@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { environment } from '../environments/environment';
 import { UserService } from './authentication/services/user.service';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './authentication/services/auth.guard';
@@ -17,16 +16,19 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { JwtInterceptor } from './authentication/Jwt-interceptor.interceptor';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
+import { SignOutComponent } from './authentication/sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
     SignInComponent,
+    SignOutComponent,
     SignUpComponent,
     NotFoundComponent,
     AuthorizationComponent,
-    GetCredentialComponent
+    GetCredentialComponent,
+    SignOutComponent
   ],
   imports: [
     BrowserModule,

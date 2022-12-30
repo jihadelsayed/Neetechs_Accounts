@@ -1,3 +1,4 @@
+import { SignOutComponent } from './authentication/sign-out/sign-out.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotAuthGuard } from './authentication/services/not-auth.guard';
@@ -9,11 +10,12 @@ import { GetCredentialComponent } from './authentication/get-credential/get-cred
 
 const routes: Routes = [
   // authentication component
-  //{ path:'', pathMatch:'full', redirectTo:'signin'},
+  //{ path:'', pathMatch:'full', redirectTo:'signIn'},
   { path:'getCredential',component: GetCredentialComponent },
-  { path:'signup',component: SignUpComponent },
-  { path:'signin',component: SignInComponent },
-  { path:'**',component: NotFoundComponent,canActivate:[NotAuthGuard] },
+  { path:'signUp',component: SignUpComponent },
+  { path:'signIn',component: SignInComponent },
+  { path:'signOut',component: SignOutComponent },
+  { path:'**',component: SignInComponent,canActivate:[NotAuthGuard] },
 ];
 
 @NgModule({
