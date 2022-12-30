@@ -35,7 +35,12 @@ import { GetCredentialComponent } from './authentication/get-credential/get-cred
     FormsModule,
     HttpClientModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },UserService,NotAuthGuard,AuthGuard],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    UserService,
+    NotAuthGuard,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
