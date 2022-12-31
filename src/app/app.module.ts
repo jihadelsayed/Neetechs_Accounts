@@ -1,4 +1,3 @@
-import { NotAuthGuard } from './authentication/services/not-auth.guard';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { NgModule } from '@angular/core';
@@ -10,7 +9,6 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './authentication/services/user.service';
 import { FormsModule } from '@angular/forms';
-import { AuthGuard } from './authentication/services/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { JwtInterceptor } from './authorization/Jwt-interceptor.interceptor';
@@ -23,6 +21,8 @@ import { ResetPasswordConfirmComponent } from './authentication/reset-password-c
 import { FacebookComponent } from './authentication/sign-in/facebook/facebook.component';
 import { GoogleComponent } from './authentication/sign-in/google/google.component';
 import { BlockchainComponent } from './authentication/sign-in/blockchain/blockchain.component';
+import { NotAuthGuard } from './authorization/services/not-auth.guard';
+import { AuthGuard } from './authorization/services/auth.guard';
 
 @NgModule({
   declarations: [

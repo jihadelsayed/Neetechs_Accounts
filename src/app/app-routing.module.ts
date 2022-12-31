@@ -4,12 +4,12 @@ import { ResetPasswordComponent } from './authentication/reset-password/reset-pa
 import { SignOutComponent } from './authentication/sign-out/sign-out.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotAuthGuard } from './authentication/services/not-auth.guard';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
-import { AuthGuard } from './authentication/services/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
+import { NotAuthGuard } from './authorization/services/not-auth.guard';
+import { AuthGuard } from './authorization/services/auth.guard';
 
 const routes: Routes = [
   // authentication component
