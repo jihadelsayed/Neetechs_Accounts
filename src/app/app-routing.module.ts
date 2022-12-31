@@ -8,8 +8,6 @@ import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
-import { NotAuthGuard } from './authorization/services/not-auth.guard';
-import { AuthGuard } from './authorization/services/auth.guard';
 
 const routes: Routes = [
   // authentication component
@@ -21,7 +19,7 @@ const routes: Routes = [
   { path:'resetPassword',component: ResetPasswordComponent },
   { path:'resetPasswordConfirm',component: ResetPasswordConfirmComponent },
   { path:'verifyEmail',component: VerifyEmailComponent },
-  { path:'**',component: SignInComponent,canActivate:[NotAuthGuard] },
+  { path:'**',component: SignInComponent },
 ];
 
 @NgModule({
