@@ -4,6 +4,6 @@ export const environment = {
   SERVER_URL_WITH_OUT_SLASH: "",
   FrontEnd_URL: window.location.origin,
   CHAT_URL: "wss://server."+ window.location.hostname.replace(/^[^.]+./, '') +"/ws/chat/",
-  SERVER_URL: "https://server."+ window.location.hostname.replace(/^[^.]+./, '') +".com/",
+  SERVER_URL: "https://server."+ window.location.hostname.replace(/^[^.]+./, '') +"/",
   MainDomain: window.location.hostname.replace(/^[^.]+./, ''),
 };
