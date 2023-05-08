@@ -4,15 +4,15 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: "http://127.0.0.1:8000/",
-  // FrontEnd_URL: "http://localhost:4200/",
-  // CHAT_URL: "ws://localhost:8000/ws/chat/",
-  // SERVER_URL_WITH_OUT_SLASH: "http://127.0.0.1:8000",
+  //SERVER_URL: "http://127.0.0.1:8000/",
+  SERVER_URL_WITH_OUT_SLASH: "http://127.0.0.1:8000",
   STRIPE_PUBLIC_KEY: "pk_test_51IwTvvIR19rXEZpRWoj9M4BGNy5nJ1GQOsXUZXHRD0PS3QGexQQSVNQR0vMB8jMoONQtO4RNQ30pC3N5BdgiGstB00shA8ejRI",
-  //SERVER_URL: "https://server.neetechs.com/",
-  SERVER_URL_WITH_OUT_SLASH: "",
-  //CHAT_URL: "wss://server.neetechs.com/ws/chat/",
-  FrontEnd_URL: "accounts.neetechs.com",
+  MY_ACCOUNT_URL: "https://myaccount.neetechs.com/",
+  SERVER_URL: "https://server.neetechs.com/",
+  CHAT_URL: "wss://server.neetechs.com/ws/chat/",
+  FrontEnd_URL: "https://neetechs.com",
+  LoginURL: "https://accounts.neetechs.com/",
+  JSON_URL: 'https://raw.githubusercontent.com/jihadelsayed/neetechs/main/json/',
 };
 
 /*
