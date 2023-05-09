@@ -6,71 +6,54 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "appAssociation": "AUTO",  // required for Dynamic Links (default is AUTO if not specified)
-
+    "appAssociation": "AUTO",
     "rewrites": [
-      // {
-      //    "source": "**",
-      //    "destination": "/en/index.html",
-      //    "dynamicLinks": true
-
-      // },
       {
         "source": "/ar{,/**}",
         "destination": "/ar/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/de{,/**}",
         "destination": "/de/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/en{,/**}",
         "destination": "/en/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/es{,/**}",
         "destination": "/es/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/fr{,/**}",
         "destination": "/fr/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/pt{,/**}",
         "destination": "/pt/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/ru{,/**}",
         "destination": "/ru/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/sv{,/**}",
         "destination": "/sv/index.html",
         "dynamicLinks": true
-
       },
       {
         "source": "/zh{,/**}",
         "destination": "/zh/index.html",
         "dynamicLinks": true
-
       }
-    ]
-    ,
+    ],
     "redirects": [
       {
         "source": "/",
