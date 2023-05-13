@@ -8,12 +8,13 @@ import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
+import { headerRoutes } from './header/header-routing.module';
 
 const routes: Routes = [
   // authentication component
   //{ path:'', pathMatch:'full', redirectTo:'signIn'},
   { path:'getCredential',component: GetCredentialComponent },
-  { path:'signUp',component: SignUpComponent }, 
+  { path:'signUp',component: SignUpComponent },
   { path:'signIn',component: SignInComponent },
   { path:'signOut',component: SignOutComponent },
   { path:'resetPassword',component: ResetPasswordComponent },
@@ -23,7 +24,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',useHash: true })],
+  imports: [
+ RouterModule.forChild(headerRoutes),
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
