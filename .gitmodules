@@ -1,6 +1,6 @@
 [submodule "src/app/authentication"]
 	path = src/app/authentication
-	url = git@github.com:authentication.git
+	url = git@github.com:jihadelsayed/authentication.git
 [submodule "src/app/not-found"]
 	path = src/app/not-found
-	url = git@github.com:not-found.git
+	url = git@github.com:jihadelsayed/not-found.git
