@@ -8,7 +8,7 @@ import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
-import { headerRoutes } from './header/header-routing.module';
+// import { headerRoutes } from './header/header-routing.module';
 
 const routes: Routes = [
   // authentication component
@@ -25,7 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
- RouterModule.forChild(headerRoutes),
+ //RouterModule.forChild(headerRoutes),
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',useHash: true })],
   exports: [RouterModule]
 })
