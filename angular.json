@@ -45,7 +45,7 @@
               "fr",
               "en"
             ],
-            "outputPath": "dist/nee-techs",
+            "outputPath": "dist/neetechs-account",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

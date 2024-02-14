@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/nee-techs/",
+    "public": "dist/neetechs-account/",
     "ignore": [
       "firebase.json",
       "**/.*",
