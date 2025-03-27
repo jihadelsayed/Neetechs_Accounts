@@ -6,15 +6,10 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "appAssociation": "AUTO",  // required for Dynamic Links (default is AUTO if not specified)
+    "appAssociation": "AUTO", 
 
     "rewrites": [
-      // {
-      //    "source": "**",
-      //    "destination": "/en/index.html",
-      //    "dynamicLinks": true
-
-      // },
+ 
       {
         "source": "/en{,/**}",
         "destination": "/en/index.html",
@@ -32,12 +27,7 @@
         "dynamicLinks": true
 
       },
-      // {
-      //   "source": "/en{,/**}",
-      //   "destination": "/en/index.html",
-      //   "dynamicLinks": true
-
-      // },
+ 
       {
         "source": "/es{,/**}",
         "destination": "/es/index.html",
