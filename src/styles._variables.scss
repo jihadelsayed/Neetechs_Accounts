@@ -1,0 +1,58 @@
+// src/styles/_variables.scss
+
+$primary-color: #FBD5BD;
+$secondary-color: #F8A242;
+$tertiary-color: #C58031;
+$quaternary-color: #945F23;
+$quinary-color: #664015;
+$senary-color: #3C2408;
+$septenary-color: #1D0E02;
+
+$highlight-color: #F3F842;
+$highlight-secondary-color: #CACE35;
+$highlight-tertiary-color: #A3A629;
+$highlight-quaternary-color: #7D801D;
+$highlight-quinary-color: #5A5C12;
+$highlight-senary-color: #383A08;
+$highlight-septenary-color: #1A1B02;
+
+$accent-color-light: #FEEDED;
+$accent-color-medium-light: #FCCAC9;
+$accent-color-medium: #F99190;
+$accent-color-medium-dark: #F84742;
+$accent-color-dark: #C4221A;
+$accent-color-darker: #86140E;
+$accent-color-darkest: #4D0705;
+
+$neutral-color-light: #DFDCDB;
+$neutral-color-medium-light: #BAB4B0;
+$neutral-color-medium: #938E8B;
+$neutral-color-medium-dark: #6E6A68;
+$neutral-color-dark: #4B4846;
+$neutral-color-darker: #2A2927;
+$neutral-color-darkest: #121110;
+
+
+// Font Color Variables
+$font-color-primary: #121110;        // Darkest neutral color
+$font-color-secondary: #4B4846;      // Dark neutral color
+$font-color-tertiary: #6E6A68;       // Medium-dark neutral color
+
+$font-color-accent-light: #F99190;   // Light accent color
+$font-color-accent: #F84742;         // Medium accent color
+$font-color-accent-dark: #C4221A;    // Dark accent color
+
+$font-color-highlight: #F3F842;      // Bright highlight color
+$font-color-muted: #BAB4B0;          // Muted neutral color
+
+// Headings Font Colors
+$font-color-h1: $font-color-primary;
+$font-color-h2: $font-color-secondary;
+$font-color-h3: $font-color-tertiary;
+
+// Paragraph Font Colors
+$font-color-paragraph: $font-color-secondary;
+
+// Link Font Colors
+$font-color-link: $font-color-accent;
+$font-color-link-hover: $font-color-accent-dark;

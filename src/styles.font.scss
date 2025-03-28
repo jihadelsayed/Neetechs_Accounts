@@ -1,0 +1,123 @@
+@use './styles._variables.scss' as *;
+
+/* Heading styles */
+a{
+  color: #F8A242
+  ;
+  text-decoration: none;
+}
+a.disabled {
+pointer-events: none;
+text-decoration: none;
+cursor: default;
+color:#BAB4B0;
+
+}
+h1 {
+   color:#FBD5BD;
+  //color: $font-color-h1;
+
+    font-size: 144px;
+    line-height: 161.8%;
+    margin: 0; /* Remove default margin */
+  }
+  
+  h2 {
+    color: #F8A242;
+    //color: $font-color-h2;
+
+    font-size: 89px;
+    line-height: 161.8%;
+    margin: 0;
+  }
+  
+  h3 {
+    color: #CACE35;
+    font-size: 55px;
+    line-height: 161.8%;
+    margin: 0;
+  }
+  
+  h4 {
+    color:#FCCAC9;
+    font-size: 34px;
+    line-height: 161.8%;
+    margin: 0;
+  }
+  /* Paragraph styles */
+  p {
+    font-size: 21px;
+    line-height: 161.8%;
+    // margin: 0 0 16px 0; /* Adjust margins as needed */
+  }
+  
+  h5 {
+    font-size: 21px;
+    line-height: 161.8%;
+    margin: 0;
+    color:#C58031;
+
+  }
+  
+  h6 {
+    font-size: 13px;
+    line-height: 161.8%;
+    margin: 0;
+  }
+  
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+span {
+  font-size: 0.9em;
+  color: #7f8c8d;
+}
+  
+  /* Other elements */
+  /* Example for smaller text */
+  .small-text {
+    font-size: 8px;
+    line-height: 161.8%;
+    margin: 0;
+  }
+  
+  /* Example for very small text */
+  .small-text {
+
+  }
+
+  /* Responsive styles for small devices */
+@media (max-width: 800px) {
+    h1 {
+        font-size: 55px; /* h3 size */
+      }
+      h2 {
+        font-size: 34px; /* h4 size */
+      }
+      h3 {
+        font-size: 21px; /* h5 size */
+      }
+      h4 {
+        font-size: 13px; /* h6 size */
+      }
+      h5 {
+        font-size: 8px; /* smaller size */
+      }
+      h6 {
+        font-size: 5px; /* very small size */
+      }
+      .small-text {
+        font-size: 3px; /* very small size */
+      }
+      p {
+        font-size: 13px;
+        line-height: 161.8%;
+        // margin: 0 0 16px 0; /* Adjust margins as needed */
+      }
+  }
+

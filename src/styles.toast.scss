@@ -1,0 +1,34 @@
+@use './styles._variables.scss' as *;
+
+
+/* styles.css or any global CSS file */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  // background-color: #333;
+  // color: #fff;
+  background-color: $highlight-color;
+  color: $neutral-color-darkest;
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+  opacity: 1;
+  bottom: 40px;
+}
+
+.toast-success {
+  background-color: #4caf50;
+}
+
+.toast-error {
+  background-color: #f44336;
+}
+.toast-info {
+  background-color: #2196f3;
+}

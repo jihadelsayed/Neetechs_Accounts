@@ -20,13 +20,15 @@ const routes: Routes = [
   { path:'resetPassword',component: ResetPasswordComponent },
   { path:'resetPasswordConfirm',component: ResetPasswordConfirmComponent },
   { path:'verifyEmail',component: VerifyEmailComponent },
-  { path:'**',component: SignInComponent },
+  { path:'**',component: SignInComponent }
 ];
 
 @NgModule({
   imports: [
  //RouterModule.forChild(headerRoutes),
-    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',useHash: true })],
+ RouterModule.forRoot(routes, { useHash: true })
+  
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

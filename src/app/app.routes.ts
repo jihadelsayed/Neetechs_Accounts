@@ -8,8 +8,10 @@ import { ResetPasswordConfirmComponent } from './authentication/reset-password-c
 import { VerifyEmailComponent } from './authentication/verify-email/verify-email.component';
 
 export const routes: Routes = [
+  { path: '/*', component: SignInComponent },
+
   { path: 'getCredential', component: GetCredentialComponent },
-  { path: 'signUp', component: SignUpComponent },
+  { path: 'signup', component: SignUpComponent },
   { path: 'signIn', component: SignInComponent },
   { path: 'signOut', component: SignOutComponent },
   { path: 'resetPassword', component: ResetPasswordComponent },
