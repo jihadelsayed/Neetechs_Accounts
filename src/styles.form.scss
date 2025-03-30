@@ -41,6 +41,8 @@ textarea:focus {
   outline: none;
 }
 
+
+
 /* Button Styling */
 button {
   // background-color: #5A5C12; /* Olive green */
@@ -49,7 +51,8 @@ button {
   color: #FFF;
   border: none;
   background-color: $secondary-color;
-
+  transition: all 0.3s ease;
+  font-weight: 500;
   border-radius: 24px;  
   padding: 10px 20px;
   font-size: 16px;
@@ -59,9 +62,15 @@ button {
 
 button:hover {
   background-color: $tertiary-color;
-
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   // background-color: #7D801D; /* Dark yellow-green */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 // icons 

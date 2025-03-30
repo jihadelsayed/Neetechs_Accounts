@@ -77,7 +77,10 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+  "google-libphonenumber"
+]
           },
           "configurations": {
             "es": {
