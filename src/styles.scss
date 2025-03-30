@@ -1,16 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 @use './styles._variables.scss' as *;
 
- 
+$container-padding-desktop: 20px;
+$container-padding-tablet: 12px;
+$container-padding-mobile: 8px;
 
 *{
   margin: 0;
   padding: 0;
   // box-sizing: border-box;
-  align-items: center; 
   box-sizing: border-box;
- //  overflow-x: hidden;
+  overflow-x: hidden;
+  transition: all 0.2s ease-in-out;
 
+}
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 header{
   z-index: 100;
@@ -35,9 +48,7 @@ body{
     background-color: $tertiary-color;
   }
 }
-h2{
-  
-}
+
 li a{
     text-decoration: none!important;
     color: aliceblue;
@@ -45,14 +56,15 @@ li a{
       text-decoration: underline;
     }
 }
-li{
-}
+
+
+
 .container-card {
+  padding: $container-padding-desktop;
   //max-width: 800px;
   margin: 0 auto;
   margin-bottom: 64px;
   margin-top: 64px;
-  padding: 20px;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
@@ -61,7 +73,17 @@ li{
   align-content: center;
   justify-content: center;
   align-items: flex-start;
+
+  @media (max-width: 800px) {
+    padding: $container-padding-tablet;
+  }
+
+  @media (max-width: 480px) {
+    padding: $container-padding-mobile;
+  }
 }
+
+
 .container {
     max-width: 1200px;
     margin: 64px auto;
@@ -92,10 +114,3 @@ hr, br{
 .display_none{
   display: none;
 }
-  /* Responsive styles for small devices */
-  @media (max-width: 800px) {
-    .container-card {
-      width: 100%;
-      padding: 0px;
-    }
-  }
