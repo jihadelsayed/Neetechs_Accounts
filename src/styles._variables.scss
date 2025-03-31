@@ -1,37 +1,37 @@
 // src/styles/_variables.scss
 
 // Brand Color Scheme
-$primary-color: #FFF3E0;               // Light background
-$secondary-color: #FFB74D;             // Soft orange
-$tertiary-color: #F7931A;              // Brand orange
-$quaternary-color: #EF6C00;            // Strong accent orange
-$quinary-color: #E65100;               // Darker action tone
-$senary-color: #BF360C;                // Deep tone
-$septenary-color: #8B2B00;             // Base dark
+$primary-color: #fff3e0; // Light background
+$secondary-color: #ffb74d; // Soft orange
+$tertiary-color: #f7931a; // Brand orange
+$quaternary-color: #ef6c00; // Strong accent orange
+$quinary-color: #e65100; // Darker action tone
+$senary-color: #bf360c; // Deep tone
+$septenary-color: #8b2b00; // Base dark
 
 // Highlight (Positive Actions & Attention)
-$highlight-color: #E3FCEC;             // Soft success background
-$highlight-secondary-color: #A7F3D0;
-$highlight-tertiary-color: #34D399;
-$highlight-quaternary-color: #10B981;
+$highlight-color: #e3fcec; // Soft success background
+$highlight-secondary-color: #a7f3d0;
+$highlight-tertiary-color: #34d399;
+$highlight-quaternary-color: #10b981;
 $highlight-quinary-color: #059669;
 $highlight-senary-color: #047857;
-$highlight-septenary-color: #065F46;
+$highlight-septenary-color: #065f46;
 
 // Accent (Cool Colors for UI accents or secondary CTAs)
-$accent-color-light: #E0F7FA;
-$accent-color-medium-light: #B2EBF2;
-$accent-color-medium: #26C6DA;
-$accent-color-medium-dark: #00ACC1;
-$accent-color-dark: #0097A7;
+$accent-color-light: #e0f7fa;
+$accent-color-medium-light: #b2ebf2;
+$accent-color-medium: #26c6da;
+$accent-color-medium-dark: #00acc1;
+$accent-color-dark: #0097a7;
 $accent-color-darker: #006064;
-$accent-color-darkest: #004D40;
+$accent-color-darkest: #004d40;
 
 // Neutrals (Backgrounds / Borders / Base UI)
-$neutral-color-light: #F5F5F5;
-$neutral-color-medium-light: #E0E0E0;
-$neutral-color-medium: #BDBDBD;
-$neutral-color-medium-dark: #9E9E9E;
+$neutral-color-light: #f5f5f5;
+$neutral-color-medium-light: #e0e0e0;
+$neutral-color-medium: #bdbdbd;
+$neutral-color-medium-dark: #9e9e9e;
 $neutral-color-dark: #616161;
 $neutral-color-darker: #424242;
 $neutral-color-darkest: #212121;
@@ -41,12 +41,12 @@ $font-color-primary: #212121;
 $font-color-secondary: #424242;
 $font-color-tertiary: #616161;
 
-$font-color-accent-light: #34D399;
-$font-color-accent: #10B981;
+$font-color-accent-light: #34d399;
+$font-color-accent: #10b981;
 $font-color-accent-dark: #059669;
 
-$font-color-highlight: #FACC15; // Bright yellow highlight
-$font-color-muted: #9E9E9E;
+$font-color-highlight: #facc15; // Bright yellow highlight
+$font-color-muted: #9e9e9e;
 
 // Headings Font Colors
 $font-color-h1: $font-color-primary;
@@ -60,14 +60,13 @@ $font-color-paragraph: $font-color-secondary;
 $font-color-link: $font-color-accent;
 $font-color-link-hover: $font-color-accent-dark;
 
-
 // Tutorial Color Tags
-$intro-color: #3498db;      // Blue
-$basics-color: #2ecc71;     // Green
-$styling-color: #9b59b6;    // Purple
-$advanced-color: #f1c40f;   // Yellow
-$projects-color: #e67e22;   // Orange
-$bonus-color: #e74c3c;      // Red
+$intro-color: #3498db; // Blue
+$basics-color: #2ecc71; // Green
+$styling-color: #9b59b6; // Purple
+$advanced-color: #f1c40f; // Yellow
+$projects-color: #e67e22; // Orange
+$bonus-color: #e74c3c; // Red
 
-$card-bg: #ecf0f1;          // Card background
+$card-bg: #ecf0f1; // Card background
 $section-bg: $neutral-color-light; // Was #f5f5f5

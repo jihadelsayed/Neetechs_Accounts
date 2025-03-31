@@ -13,24 +13,21 @@ import { GetCredentialComponent } from './authentication/get-credential/get-cred
 const routes: Routes = [
   // authentication component
   //{ path:'', pathMatch:'full', redirectTo:'signIn'},
-  { path:'getCredential',component: GetCredentialComponent },
-  { path:'signUp',component: SignUpComponent },
-  { path:'signIn',component: SignInComponent },
-  { path:'signOut',component: SignOutComponent },
-  { path:'resetPassword',component: ResetPasswordComponent },
-  { path:'resetPasswordConfirm',component: ResetPasswordConfirmComponent },
-  { path:'verifyEmail',component: VerifyEmailComponent },
-  { path:'**',component: SignInComponent }
+  { path: 'getCredential', component: GetCredentialComponent },
+  { path: 'signUp', component: SignUpComponent },
+  { path: 'signIn', component: SignInComponent },
+  { path: 'signOut', component: SignOutComponent },
+  { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'resetPasswordConfirm', component: ResetPasswordConfirmComponent },
+  { path: 'verifyEmail', component: VerifyEmailComponent },
+  { path: '**', component: SignInComponent },
 ];
 
 @NgModule({
   imports: [
- //RouterModule.forChild(headerRoutes),
- RouterModule.forRoot(routes, { useHash: true })
-  
+    //RouterModule.forChild(headerRoutes),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

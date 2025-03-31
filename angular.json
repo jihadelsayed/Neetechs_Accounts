@@ -45,11 +45,8 @@
             ],
             "outputPath": "dist/neetechs-account",
             "index": "src/index.html",
-            "browser": "src/main.ts", 
-            "polyfills": [
-              "zone.js",
-              "@angular/localize/init"
-            ],
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -69,8 +66,6 @@
               "src/styles.font.scss",
               "src/styles.form.scss",
               "src/styles.toast.scss"
-              
-
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -78,61 +73,38 @@
             "ssr": {
               "entry": "server.ts"
             },
-            "allowedCommonJsDependencies": [
-  "google-libphonenumber"
-]
+            "allowedCommonJsDependencies": ["google-libphonenumber"]
           },
           "configurations": {
             "es": {
-              "localize": [
-                "es"
-              ]
+              "localize": ["es"]
             },
             "en": {
-              "localize": [
-                "en"
-              ]
+              "localize": ["en"]
             },
             "pt": {
-              "localize": [
-                "pt"
-              ]
+              "localize": ["pt"]
             },
             "ar": {
-              "localize": [
-                "ar"
-              ]
+              "localize": ["ar"]
             },
             "de": {
-              "localize": [
-                "de"
-              ]
+              "localize": ["de"]
             },
             "ru": {
-              "localize": [
-                "ru"
-              ]
+              "localize": ["ru"]
             },
             "sv": {
-              "localize": [
-                "sv"
-              ]
+              "localize": ["sv"]
             },
             "zh": {
-              "localize": [
-                "zh"
-              ]
+              "localize": ["zh"]
             },
             "fr": {
-              "localize": [
-                "fr"
-              ]
+              "localize": ["fr"]
             },
-            "public": {
-            },
+            "public": {},
             "production": {
-               
-                
               "budgets": [
                 {
                   "type": "initial",
@@ -240,10 +212,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
