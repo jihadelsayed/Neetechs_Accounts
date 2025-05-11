@@ -22,12 +22,15 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
 
     this.mainDomain = hostname.replace(/^[^.]+\./, '');
     this.frontEndUrl = origin;
-    this.serverUrl = `https://api.${hostname}/`;
-    this.serverUrlWithoutSlash = this.serverUrl.slice(0, -1);
-    this.chatUrl = `wss://api.${hostname}/ws/chat/`;
+    this.mainDomain = hostname.includes('localhost')
+      ? 'neetechs.com'
+      : hostname.replace(/^[^.]+\./, '');
 
-    // ✅ Don't duplicate "getCredential" — just leave a trailing slash
-    this.loginUrl = `https://accounts.${hostname}/${lang}/`;
+    this.serverUrl = `https://api.${this.mainDomain}/`;
+    this.serverUrlWithoutSlash = this.serverUrl.slice(0, -1);
+    this.chatUrl = `wss://api.${this.mainDomain}/ws/chat/`;
+    this.loginUrl = `https://accounts.${this.mainDomain}/${lang}/`;
+
   }
 }
 
