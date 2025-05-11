@@ -18,9 +18,9 @@ export class RuntimeConfigService {
 
       this.mainDomain = domain;
       this.frontEndUrl = origin;
-      this.serverUrl = `https://server.${hostname}/`;
+      this.serverUrl = `https://api.${hostname}/`;
       this.serverUrlWithoutSlash = this.serverUrl.slice(0, -1);
-      this.chatUrl = `wss://server.${hostname}/ws/chat/`;
+      this.chatUrl = `wss://api.${hostname}/ws/chat/`;
       this.loginUrl = `https://accounts.${hostname}/`;
     }
   }
