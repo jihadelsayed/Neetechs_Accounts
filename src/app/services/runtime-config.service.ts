@@ -10,18 +10,25 @@ export class RuntimeConfigService {
   public loginUrl = '';
   public mainDomain = '';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    if (isPlatformBrowser(this.platformId)) {
-      const hostname = window.location.hostname;
-      const origin = window.location.origin;
-      const domain = window.location.hostname.replace(/^[^.]+\./, '');
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  if (isPlatformBrowser(this.platformId)) {
+    let hostname = window.location.hostname;
+    const origin = window.location.origin;
+    const lang = navigator.language?.substring(0, 2) || 'en';
 
-      this.mainDomain = domain;
-      this.frontEndUrl = origin;
-      this.serverUrl = `https://api.${hostname}/`;
-      this.serverUrlWithoutSlash = this.serverUrl.slice(0, -1);
-      this.chatUrl = `wss://api.${hostname}/ws/chat/`;
-      this.loginUrl = `https://accounts.${hostname}/`;
+    if (hostname.includes('localhost')) {
+      hostname = 'neetechs.com'; // force production domain
     }
+
+    this.mainDomain = hostname.replace(/^[^.]+\./, '');
+    this.frontEndUrl = origin;
+    this.serverUrl = `https://api.${hostname}/`;
+    this.serverUrlWithoutSlash = this.serverUrl.slice(0, -1);
+    this.chatUrl = `wss://api.${hostname}/ws/chat/`;
+
+    // ✅ Don't duplicate "getCredential" — just leave a trailing slash
+    this.loginUrl = `https://accounts.${hostname}/${lang}/`;
   }
+}
+
 }
