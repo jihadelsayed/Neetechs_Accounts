@@ -8,6 +8,7 @@ import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GetCredentialComponent } from './authentication/get-credential/get-credential.component';
+import { SocialRedirectComponent } from './authentication/social-redirect/social-redirect.component';
 // import { headerRoutes } from './header/header-routing.module';
 
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'resetPassword', component: ResetPasswordComponent },
   { path: 'resetPasswordConfirm', component: ResetPasswordConfirmComponent },
   { path: 'verifyEmail', component: VerifyEmailComponent },
+  { path: 'social-login-complete', component: SocialRedirectComponent },
+
   { path: '**', component: SignInComponent },
 ];
 
