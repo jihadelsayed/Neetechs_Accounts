@@ -26,9 +26,9 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
       ? 'neetechs.com'
       : hostname.replace(/^[^.]+\./, '');
 
-    this.serverUrl = `https://api.${this.mainDomain}/`;
+    this.serverUrl = `https://server.${this.mainDomain}/`;
     this.serverUrlWithoutSlash = this.serverUrl.slice(0, -1);
-    this.chatUrl = `wss://api.${this.mainDomain}/ws/chat/`;
+    this.chatUrl = `wss://server.${this.mainDomain}/ws/chat/`;
     this.loginUrl = `https://accounts.${this.mainDomain}/${lang}/`;
 
   }
