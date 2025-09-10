@@ -7,15 +7,14 @@
     "types": [
       "node",
       "@angular/localize"
-    ],
-    "paths": {
-      "src/*": ["./src/*"]
-    }
+    ]
+
   },
   "files": [
     "src/main.ts",
     "src/main.server.ts",
-    "server.ts"
+    "server.ts",
+    "src/typings.d.ts"
   ],
   "include": [
     "src/**/*.d.ts"
