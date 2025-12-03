@@ -1,0 +1,348 @@
+<div class="body-signup">
+  <div class="signup-layout">
+    <div class="signup-top">
+      <!-- Left Panel -->
+      <div class="left-panel">
+        <img src="https://i.imgur.com/3fLGfPn.png" alt="Neetechs Logo" />
+        <h2 class="step-indicator">Create your Neetechs account</h2>
+        <p class="login-link">
+          Already have an account? <a routerLink="/login">Log In</a>
+        </p>
+
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="step * 33.33"></div>
+          </div>
+          <p class="progress-text">Step {{ step }} of 3</p>
+        </div>
+      </div>
+
+      <!-- Right Panel (Form) -->
+      <div class="right-panel signup-container">
+        <!-- Left: Logo -->
+        @if (!stepLoading) {
+          <form #signupForm="ngForm" (ngSubmit)="OnSubmit(signupForm)">
+            <!-- Step 1 -->
+            @if (step === 1) {
+              <div class="stepDev">
+                <!-- Toggle -->
+                <p class="toggle-note">
+                  Choose how you'd like to sign up. You'll receive a confirmation
+                  code via your selected method.
+                </p>
+
+                <div class="toggle-group">
+                  <button
+                    type="button"
+                    [class.active]="!useEmail"
+                    (click)="useEmail = false"
+                  >
+                    Mobile Number
+                  </button>
+                  <button
+                    type="button"
+                    [class.active]="useEmail"
+                    (click)="useEmail = true"
+                  >
+                    Email
+                  </button>
+                </div>
+
+                <!-- Conditional Fields -->
+                @if (useEmail) {
+                  <div>
+                    <input
+                      type="email"
+                      name="email"
+                      [(ngModel)]="user.email"
+                      placeholder="Email"
+                      required
+                      autocomplete="email"
+                      #emailRef="ngModel"
+                      [class.invalid]="emailRef.invalid && emailRef.touched"
+                    />
+                    @if (emailRef.invalid && emailRef.touched) {
+                      <div class="error">Invalid email address</div>
+                    }
+                  </div>
+                } @else {
+                  <div class="phone-group">
+                    <select [(ngModel)]="selectedCountry" name="country" required>
+                      @for (c of phoneService.countries; track c.code) {
+                        <option [value]="c.code">
+                          {{ c.flag }} +{{ c.dialCode }}
+                        </option>
+                      }
+                    </select>
+
+                    <input
+                      type="tel"
+                      name="phone"
+                      [(ngModel)]="user.phone"
+                      required
+                      #phoneRef="ngModel"
+                      [class.invalid]="
+                        (phoneRef.invalid ||
+                          !phoneService.isValidPhone(
+                            phoneService.getFullPhoneNumber(
+                              this.selectedCountry,
+                              this.user.phone
+                            )
+                          )) &&
+                        phoneTouched
+                      "
+                      (blur)="phoneTouched = true"
+                      placeholder="Mobile number"
+                    />
+                  </div>
+
+                  @if (
+                    (phoneRef.invalid ||
+                      !phoneService.isValidPhone(
+                        phoneService.getFullPhoneNumber(
+                          this.selectedCountry,
+                          this.user.phone
+                        )
+                      )) &&
+                    phoneTouched
+                  ) {
+                    <div class="error">
+                      Invalid phone number
+                    </div>
+                  }
+                }
+
+                <!-- Terms -->
+
+                <label class="terms-checkbox">
+                  <input
+                    type="checkbox"
+                    name="smsConsent"
+                    [(ngModel)]="user.smsConsent"
+                    required
+                  />
+                  I agree to receive account-related and marketing messages via
+                  SMS. Standard rates may apply. By continuing, I accept the
+                  <a
+                    href="https://neetechs.com/en/terms-of-service"
+                    target="_blank"
+                    >Terms of Service</a
+                  >
+                  and
+                  <a href="https://neetechs.com/en/privacy-policy" target="_blank"
+                    >Privacy Policy</a
+                  >.
+                </label>
+
+                <button
+                  type="button"
+                  class="nextButton"
+                  (click)="nextStepWithSpinner()"
+                  [disabled]="!isStep1Valid()"
+                >
+                  Next
+                </button>
+              </div>
+            }
+
+            <!-- Step 1.5 - Phone Verification -->
+            @if (step === 1.5) {
+              <div class="stepDev">
+                <p class="verification-note">
+                  We've sent a 6-digit code to
+                  {{
+                    phoneService.getFullPhoneNumber(
+                      this.selectedCountry,
+                      this.user.phone
+                    )
+                  }}. Please enter it below to verify your number.
+                </p>
+
+                <input
+                  type="text"
+                  maxlength="6"
+                  [(ngModel)]="this.phoneService.phoneVerificationCode"
+                  name="verificationCode"
+                  placeholder="Enter verification code"
+                  required
+                  autocomplete="one-time-code"
+                />
+
+                @if (this.phoneService.phoneVerificationError) {
+                  <div class="error">
+                    {{ this.phoneService.phoneVerificationError }}
+                  </div>
+                }
+
+                <button type="button" class="backButton" (click)="step = 1">
+                  Back
+                </button>
+                <button type="button" class="nextButton" (click)="this.verifyCode()">
+                  Verify & Continue
+                </button>
+              </div>
+            }
+
+            <!-- Step 2 -->
+            @if (step === 2) {
+              <div class="stepDev">
+                <input
+                  type="text"
+                  name="name"
+                  [(ngModel)]="user.name"
+                  placeholder="First Name"
+                  required
+                />
+                <input
+                  type="text"
+                  name="username"
+                  [(ngModel)]="user.username"
+                  placeholder="Username"
+                  required
+                />
+
+                <button
+                  type="button"
+                  class="backButton"
+                  (click)="prevStepWithSpinner()"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  [disabled]="stepLoading"
+                  class="nextButton"
+                  (click)="nextStepWithSpinner()"
+                >
+                  @if (!stepLoading) {
+                    Next
+                  } @else {
+                    <img
+                      src="https://i.imgur.com/llF5iyg.gif"
+                      alt="loading"
+                      width="20"
+                    />
+                  }
+                </button>
+              </div>
+            }
+
+            <!-- Step 3 -->
+            @if (step === 3) {
+              <div class="stepDev">
+                <!-- Password -->
+                <div class="password-group">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    name="password1"
+                    [(ngModel)]="user.password1"
+                    placeholder="Password"
+                    required
+                    autocomplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    (click)="showPassword = !showPassword"
+                    class="toggle-eye"
+                  >
+                    dY`?
+                  </button>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="password-group">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    name="password2"
+                    [(ngModel)]="user.password2"
+                    placeholder="Confirm Password"
+                    required
+                    autocomplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    (click)="showPassword = !showPassword"
+                    class="toggle-eye"
+                  >
+                    dY`?
+                  </button>
+                </div>
+                <!-- Password Strength Meter -->
+                @if (passwordStrength.label) {
+                  <div class="password-strength">
+                    <div class="strength-bar">
+                      <div
+                        [ngClass]="strengthClass"
+                        [style.width.%]="passwordStrength.percent"
+                      ></div>
+                    </div>
+                    <p class="strength-label">{{ passwordStrength.label }}</p>
+                  </div>
+                }
+
+                @if (passwordMismatch) {
+                  <div class="error">
+                    Passwords do not match.
+                  </div>
+                }
+
+                <button
+                  type="button"
+                  class="backButton"
+                  (click)="prevStepWithSpinner()"
+                >
+                  Back
+                </button>
+                <!-- Submit -->
+                <button [disabled]="loading" type="submit" class="submit-btn">
+                  @if (!loading) {
+                    <span>Create Account</span>
+                  } @else {
+                    <span>Creating...</span>
+                  }
+                </button>
+              </div>
+            }
+          </form>
+        } @else {
+          <div class="step-spinner">
+            <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading..." />
+          </div>
+        }
+        <form
+          #signupForm="ngForm"
+          (ngSubmit)="OnSubmit(signupForm)"
+          role="form"
+        >
+          <!-- Password -->
+
+          <div class="divider">Or sign up with</div>
+
+          <div class="oauth-buttons">
+            <button type="button" class="oauth google">Google</button>
+            <button type="button" class="oauth apple">Apple</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="form-footer">
+      <select [(ngModel)]="language">
+        <option value="en">English</option>
+        <option value="es">Espanol</option>
+        <!-- add more if needed -->
+      </select>
+      <div>
+        <a href="https://neetechs.com/en/terms-of-service" target="_blank"
+          >Terms</a
+        >
+        <a href="https://neetechs.com/en/privacy-policy" target="_blank"
+          >Privacy</a
+        >
+        <a href="https://neetechs.com/en/customer-support" target="_blank"
+          >Help</a
+        >
+      </div>
+    </footer>
+  </div>
+</div>

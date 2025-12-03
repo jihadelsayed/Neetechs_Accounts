@@ -1,0 +1,73 @@
+.error-page {
+  background: linear-gradient(to right, #d8b4fe, #bfdbfe);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.error-code {
+  font-size: 6rem;
+  color: #a855f7;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.error-message {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.error-description {
+  font-size: 1.25rem;
+  color: #555;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  color: #fff;
+}
+
+.home-btn {
+  background: linear-gradient(to right, #a855f7, #3b82f6);
+}
+
+.home-btn:hover {
+  background: linear-gradient(to right, #ec4899, #f97316);
+}
+
+.contact-btn {
+  background: linear-gradient(to right, #ef4444, #dc2626);
+}
+
+.contact-btn:hover {
+  background: linear-gradient(to right, #b91c1c, #991b1b);
+}
