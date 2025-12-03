@@ -1,10 +1,11 @@
 // phone.service.ts
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { Observable } from "rxjs/internal/Observable";
 import { DeviceIdService } from "./device-id.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { RuntimeConfigService } from "../../services/runtime-config.service";
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({ providedIn: "root" })
 export class PhoneService {
@@ -22,7 +23,8 @@ export class PhoneService {
   constructor(
     private http: HttpClient,
     private config: RuntimeConfigService,
-    private deviceIdService: DeviceIdService
+    private deviceIdService: DeviceIdService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   isValidPhone(phone: string): boolean {
@@ -79,7 +81,7 @@ verifyCode(
 
   this.http.post<any>(url, { phone: fullPhone, otp }, { headers }).subscribe({
     next: (res) => {
-      if (res.token) {
+      if (res.token && isPlatformBrowser(this.platformId)) {
         localStorage.setItem("userToken", res.token);
         localStorage.setItem("UserInfo", JSON.stringify(res.user));
         onSuccess(res.has_password);

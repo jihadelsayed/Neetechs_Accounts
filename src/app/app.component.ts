@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
+import { PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +12,14 @@ import { Router, RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'neetechs-account';
   
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const token = localStorage.getItem("userToken");
     if (!token || this.isTokenExpired(token)) {
       this.router.navigate(['/login']);

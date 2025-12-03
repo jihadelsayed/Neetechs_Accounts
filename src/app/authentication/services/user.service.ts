@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { RuntimeConfigService } from "../../services/runtime-config.service";
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +13,11 @@ export class UserService {
     throw new Error("Method not implemented.");
   }
   User: any;
-  constructor(private http: HttpClient, private config: RuntimeConfigService) {}
+  constructor(
+    private http: HttpClient,
+    private config: RuntimeConfigService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 registerUser(user: any) {
 
   const body: any = {
@@ -30,11 +35,13 @@ registerUser(user: any) {
   console.log(body)
   return this.http.post(this.config.serverUrl + "auth/register/", body);
 }
-userAuthentication(payload: { identifier: string; password: string }) {
+  userAuthentication(payload: { identifier: string; password: string }) {
     return this.http.post(this.config.serverUrl + "auth/login/", payload);
   }
  setPassword(password: string) {
-  const token = localStorage.getItem("userToken");
+  const token = isPlatformBrowser(this.platformId)
+    ? localStorage.getItem("userToken")
+    : null;
   const headers = new HttpHeaders({
     "Authorization": `Token ${token}`,
     "Content-Type": "application/json"
