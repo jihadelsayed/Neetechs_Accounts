@@ -11,9 +11,17 @@ export const routes: Routes = [
   { path: '/*', component: SignInComponent },
 
   { path: 'getCredential', component: GetCredentialComponent },
+
+  { path: 'login', component: SignInComponent }, // or
+  { path: 'signIn', redirectTo: 'login', pathMatch: 'full' }, // optional, for old links
+    
+  // SIGNUP
   { path: 'signup', component: SignUpComponent },
-  { path: 'signIn', component: SignInComponent },
-  { path: 'signOut', component: SignOutComponent },
+  { path: 'register', redirectTo: 'signup', pathMatch: 'full' }, // optional alias
+  
+  { path: 'logout', component: SignOutComponent },
+  { path: 'signOut', redirectTo: 'logout', pathMatch: 'full' }, // optional alias
+
   //{ path: 'resetPassword', component: ResetPasswordComponent },
   //{ path: 'resetPasswordConfirm', component: ResetPasswordConfirmComponent },
   { path: 'verifyEmail', component: VerifyEmailComponent },
