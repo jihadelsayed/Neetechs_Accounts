@@ -140,11 +140,20 @@ onLoginSubmit(form: NgForm): void {
       this.cookie.set("UserInfo", JSON.stringify(data.user));
 
       // build redirect URL
-      const redirectHost = this.host ?? "neetechs.com";
-      const redirectPort = this.port ?? "443";
-      const redirectLang = (this.language ?? "en").slice(0, 2);
-      const redirectPath = this.pathname ?? "";
-      const finalRedirect = `https://${redirectHost}:${redirectPort}/#/${redirectLang}/${redirectPath}`;
+      /**
+       * After successful authentication we redirect the user back to the host
+       * that opened the login window.  The previous implementation appended
+       * a hash (/#/) and hard‑coded a port, which does not align with the
+       * route configuration used on neetechs.com and myaccount.neetechs.com.
+       * Instead, we construct a clean URL of the form:
+       *   https://<host>/<pathname>
+       * The language is not part of the path in our Angular apps, so we
+       * exclude it from the redirect.  If no host is provided, default
+       * to neetechs.com.
+       */
+      const redirectHost = this.host || 'neetechs.com';
+      const redirectPath = this.pathname || '';
+      const finalRedirect = `https://${redirectHost}${redirectPath}`;
 
       window.location.href = finalRedirect;
       this.loginLoading = false;
