@@ -20,6 +20,7 @@ export class SignUpComponent implements OnInit {
   passwordMismatch: boolean = false;
 
   passwordStrength = { percent: 0, label: "", strengthClass: "" };
+  returnUrl: string | null = null;
 
   strengthClass: string = "";
   user: any = {
@@ -52,23 +53,18 @@ export class SignUpComponent implements OnInit {
   ) {}
   private intervalId: any;
 
-  ngOnInit(): void {
-    this.resetForm();
-    // Watch password changes
-    // this.intervalId = setInterval(() => {
-    //   if (this.user.password1 !== "") {
-    //     console.log("jihad");
-    //     this.evaluatePasswordStrength(this.user.password1);
-    //   }
-    // }, 1000);
+ngOnInit(): void {
+  this.resetForm();
 
-    this.route.queryParams.subscribe((params: any) => {
-      this.host = params["host"] ?? null;
-      this.port = params["port"] ?? "443";
-      this.pathname = params["pathname"] ?? "";
-      this.language = params["language"] ?? "en";
-    });
-  }
+  this.route.queryParams.subscribe((params: any) => {
+    this.host = params['host'] ?? null;
+    this.port = params['port'] ?? '443';
+    this.pathname = params['pathname'] ?? '';
+    this.language = params['language'] ?? 'en';
+    this.returnUrl = params['return_url'] ?? null;
+  });
+}
+
   ngOnDestroy(): void {
     if (this.intervalId) {
       clearInterval(this.intervalId);
@@ -81,20 +77,27 @@ verifyCode() {
     this.phoneService.phoneVerificationCode,
     (hasPassword: boolean) => {
       if (hasPassword) {
-        // Password already exists → skip to dashboard or redirect
-        const redirectHost = this.host ?? "neetechs.com";
-        const redirectPort = this.port ?? "443";
-        const redirectLang = (this.language ?? "en").slice(0, 2);
-        const redirectPath = this.pathname ?? "";
-        const finalRedirect = `https://${redirectHost}:${redirectPort}/#/${redirectLang}/${redirectPath}`;
+        // ✅ Prefer explicit return_url if provided
+        if (this.returnUrl) {
+          let target = this.returnUrl;
+          try {
+            target = decodeURIComponent(this.returnUrl);
+          } catch {}
+          window.location.href = target;
+          return;
+        }
+
+        const redirectHost = this.host ?? 'neetechs.com';
+        const redirectPath = this.pathname ?? '';
+        const finalRedirect = `https://${redirectHost}${redirectPath}`;
         window.location.href = finalRedirect;
       } else {
-        // No password yet → go to Step 2
         this.step = 2;
       }
     }
   );
 }
+
 
   resetForm(form?: NgForm) {
     if (form) form.reset();
@@ -158,8 +161,8 @@ OnSubmit(form: NgForm) {
   this.passwordMismatch = this.user.password1 !== this.user.password2;
 
   if (this.passwordMismatch || this.user.password1.length < 6) {
-    this.passwordStrength.label = "Too short";
-    this.strengthClass = "weak";
+    this.passwordStrength.label = 'Too short';
+    this.strengthClass = 'weak';
     return;
   }
 
@@ -167,19 +170,28 @@ OnSubmit(form: NgForm) {
 
   this.userService.setPassword(this.user.password1).subscribe({
     next: () => {
-      const redirectHost = this.host ?? "neetechs.com";
-      const redirectPort = this.port ?? "443";
-      const redirectLang = (this.language ?? "en").slice(0, 2);
-      const redirectPath = this.pathname ?? "";
-      const finalRedirect = `https://${redirectHost}:${redirectPort}/#/${redirectLang}/${redirectPath}`;
+      // ✅ Prefer explicit return_url
+      if (this.returnUrl) {
+        let target = this.returnUrl;
+        try {
+          target = decodeURIComponent(this.returnUrl);
+        } catch {}
+        window.location.href = target;
+        return;
+      }
+
+      const redirectHost = this.host ?? 'neetechs.com';
+      const redirectPath = this.pathname ?? '';
+      const finalRedirect = `https://${redirectHost}${redirectPath}`;
       window.location.href = finalRedirect;
     },
     error: (err) => {
       this.loading = false;
-      console.error("Failed to set password:", err);
-    }
+      console.error('Failed to set password:', err);
+    },
   });
 }
+
 
   isStep1Valid(): boolean {
     if (this.useEmail) {

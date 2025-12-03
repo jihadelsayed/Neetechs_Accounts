@@ -67,6 +67,7 @@ export class SignInComponent implements OnInit {
   host: string | null = null;
   port: string | null = null;
   pathname: string | null = null;
+returnUrl: string | null = null;
 
   constructor(
     private userService: UserService,
@@ -85,6 +86,7 @@ export class SignInComponent implements OnInit {
       this.port = params["port"] ?? "443";
       this.pathname = params["pathname"] ?? "";
       this.language = params["language"] ?? "en";
+      this.returnUrl = params['return_url'] ?? null;
     });
   }
 
@@ -112,7 +114,6 @@ export class SignInComponent implements OnInit {
 onLoginSubmit(form: NgForm): void {
   if (!form.valid) return;
 
-  // figure out which field to send
   let payload: any;
   if (this.loginUseEmail) {
     payload = {
@@ -133,41 +134,38 @@ onLoginSubmit(form: NgForm): void {
 
   this.userService.userAuthentication(payload).subscribe(
     (data: any) => {
-      // store user info
-      localStorage.setItem("userToken", data.token);
-      localStorage.setItem("UserInfo", JSON.stringify(data.user));
-      this.cookie.set("userToken", data.token);
-      this.cookie.set("UserInfo", JSON.stringify(data.user));
+      localStorage.setItem('userToken', data.token);
+      localStorage.setItem('UserInfo', JSON.stringify(data.user));
+      this.cookie.set('userToken', data.token);
+      this.cookie.set('UserInfo', JSON.stringify(data.user));
 
-      // build redirect URL
-      /**
-       * After successful authentication we redirect the user back to the host
-       * that opened the login window.  The previous implementation appended
-       * a hash (/#/) and hard‑coded a port, which does not align with the
-       * route configuration used on neetechs.com and myaccount.neetechs.com.
-       * Instead, we construct a clean URL of the form:
-       *   https://<host>/<pathname>
-       * The language is not part of the path in our Angular apps, so we
-       * exclude it from the redirect.  If no host is provided, default
-       * to neetechs.com.
-       */
-      const redirectHost = this.host || 'neetechs.com';
-      const redirectPath = this.pathname || '';
-      const finalRedirect = `https://${redirectHost}${redirectPath}`;
+      // ✅ Prefer explicit return_url if provided
+      if (this.returnUrl) {
+        let target = this.returnUrl;
+        try {
+          target = decodeURIComponent(this.returnUrl);
+        } catch {}
+        window.location.href = target;
+      } else {
+        // Fallback: old host/pathname logic
+        const redirectHost = this.host || 'neetechs.com';
+        const redirectPath = this.pathname || '';
+        const finalRedirect = `https://${redirectHost}${redirectPath}`;
+        window.location.href = finalRedirect;
+      }
 
-      window.location.href = finalRedirect;
       this.loginLoading = false;
     },
     (error: any) => {
       this.loginLoading = false;
-      let msg: string = "Login failed";
+      let msg: string = 'Login failed';
 
       if (error.status === 400) {
-        if (error.error["non_field_errors"])
-          msg = error.error["non_field_errors"];
-        else if (error.error["email"]) msg = error.error["email"];
-        else if (error.error["phone"]) msg = error.error["phone"];
-        else if (error.error["password"]) msg = error.error["password"];
+        if (error.error['non_field_errors'])
+          msg = error.error['non_field_errors'];
+        else if (error.error['email']) msg = error.error['email'];
+        else if (error.error['phone']) msg = error.error['phone'];
+        else if (error.error['password']) msg = error.error['password'];
       } else {
         msg = error.message;
       }
@@ -176,6 +174,7 @@ onLoginSubmit(form: NgForm): void {
     }
   );
 }
+
 
 
   // promptToSavePasskey(user: any) {
@@ -238,19 +237,28 @@ onLoginSubmit(form: NgForm): void {
     );
   }
 
-  verifyLoginOtp() {
-    this.phoneService.verifyCode(
-      this.selectedCountry,
-      this.loginUser.phone,
-      this.phoneService.phoneVerificationCode,
-      (hasPassword) => {
-        const redirectHost = this.host ?? "neetechs.com";
-        const redirectPort = this.port ?? "443";
-        const redirectLang = (this.language ?? "en").slice(0, 2);
-        const redirectPath = this.pathname ?? "";
-        const finalRedirect = `https://${redirectHost}:${redirectPort}/#/${redirectLang}/${redirectPath}`;
-        window.location.href = finalRedirect;
+verifyLoginOtp() {
+  this.phoneService.verifyCode(
+    this.selectedCountry,
+    this.loginUser.phone,
+    this.phoneService.phoneVerificationCode,
+    (hasPassword) => {
+      // ✅ Prefer explicit return_url if exists
+      if (this.returnUrl) {
+        let target = this.returnUrl;
+        try {
+          target = decodeURIComponent(this.returnUrl);
+        } catch {}
+        window.location.href = target;
+        return;
       }
-    );
-  }
+
+      const redirectHost = this.host ?? 'neetechs.com';
+      const redirectPath = this.pathname ?? '';
+      const finalRedirect = `https://${redirectHost}${redirectPath}`;
+      window.location.href = finalRedirect;
+    }
+  );
+}
+
 }

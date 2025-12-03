@@ -16,6 +16,8 @@ export class SignOutComponent implements OnInit {
   host: any;
   pathname: any;
   language: any;
+
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       /**
