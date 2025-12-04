@@ -1,115 +1,167 @@
 @use "../../../styles._variables.scss" as *;
 @use "sass:color";
 
+// Local palette tuned to match main Neetechs landing
+$brand-bg: #050816;
+$brand-card: #020617;
+$brand-card-soft: #0b1020;
+$brand-orange: #f7931a;
+$brand-orange-soft: #fbbf24;
+$brand-border-soft: rgba(148, 163, 184, 0.35);
+$brand-muted: #9ca3af;
+$brand-text: #e5e7eb;
+
+// ───────────────────────────────────────────────
+// Page wrapper
+// ───────────────────────────────────────────────
 .body-signin {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: $neutral-color-light;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at top left, rgba(247, 147, 26, 0.14), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 55%),
+    $brand-bg;
+  font-family: inherit;
+  color: $brand-text;
 }
 
+// ───────────────────────────────────────────────
+// Card shell
+// ───────────────────────────────────────────────
 .signin-layout {
-  max-width: 853px;
+  max-width: 920px;
   width: 100%;
-  min-height: 70vh;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  // min-height: 520px;
+  border-radius: 24px;
+  padding: 0;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+  border: 1px solid $brand-border-soft;
+  box-shadow:
+    0 22px 60px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.8);
+  overflow: hidden;
+
   p {
     overflow-y: hidden;
   }
+
   .signin-top {
     display: flex;
-    background: $primary-color;
-    color: $font-color-primary;
-    padding: 2rem;
-    border-radius: 12px;
+    align-items: stretch;
+
+    
   }
 
+  // LEFT PANEL – orange hero strip
   .left-panel {
     flex: 1;
-    background: linear-gradient(to bottom, $tertiary-color, $quinary-color);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-
+    background: linear-gradient(180deg, #f97316, #f7931a);
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 2.2rem 2rem;
+    text-align: left;
     align-items: center;
-    padding: 2rem;
-    text-align: center;
-    border-right: 1px solid $neutral-color-medium-light;
+    position: relative;
 
     img {
-      max-width: 150px;
-      margin-bottom: 1rem;
+      max-width: 140px;
+      margin-bottom: 1.25rem;
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
     }
 
     h2 {
-      font-size: 2.2rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: white;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
     .login-link {
-      font-size: 1rem;
-      margin: 1rem 0;
+      font-size: 0.95rem;
+      margin: 0.4rem 0 1.5rem;
 
       a {
         font-weight: 600;
         color: white;
         text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover {
+          text-decoration-thickness: 2px;
+        }
       }
     }
 
     .step-indicator {
-      font-size: 1rem;
+      font-size: 0.8rem;
       margin-top: auto;
       color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
   }
 
+  // RIGHT PANEL – dark card with form
   .right-panel {
-    flex: 2;
-    background: white;
-    color: $font-color-secondary;
-    padding: 2.5rem;
+    flex: 1.6;
+    background: linear-gradient(145deg, $brand-card-soft, $brand-card);
+    color: $brand-text;
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
 
     .signin-container {
-      max-width: 500px;
-      margin: auto;
+      max-width: 480px;
+      margin: 0 auto;
       width: 100%;
-      padding: 1rem 0;
+      padding: 0;
     }
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    .signin-top {
+      flex-direction: column;
+    }
 
     .left-panel {
-      padding: 1.5rem;
+      padding: 1.7rem 1.6rem;
+      text-align: center;
+
+      img {
+        margin: 0 auto 1rem;
+      }
+
+      .step-indicator {
+        margin-top: 1.2rem;
+      }
     }
 
     .right-panel {
-      padding: 1.5rem;
-
-      .form-footer {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
-      }
+      padding: 1.8rem 1.4rem;
     }
   }
 }
 
+// ───────────────────────────────────────────────
+// Form & controls
+// ───────────────────────────────────────────────
 .signin-container {
   h5 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: $font-color-primary;
+    text-align: left;
+    font-size: 1.45rem;
+    margin-bottom: 0.9rem;
+    color: $brand-text;
+  }
+
+  .toggle-note {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $brand-text;
+    margin-bottom: 0.75rem;
   }
 
   form {
@@ -117,58 +169,81 @@
     flex-direction: column;
     gap: 1rem;
   }
+
   .stepDev {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
+
+  // pill toggle
   .toggle-group {
-    display: flex;
-    justify-content: space-between;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.16rem;
+    background: rgba(15, 23, 42, 0.9);
     border-radius: 999px;
-    font-size: 0.95rem;
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    font-size: 0.92rem;
+
     button {
       flex: 1;
-      padding: 0.6rem 0.8rem;
+      padding: 0.55rem 1.3rem;
       font-weight: 500;
-      background: $neutral-color-medium-light;
-      color: $font-color-primary;
+      background: transparent;
+      color: $brand-muted;
       border: none;
       cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.3s;
+      border-radius: 999px;
+      transition:
+        background 0.18s ease-out,
+        color 0.18s ease-out,
+        transform 0.12s ease-out;
 
       &.active {
-        background: $accent-color-dark;
+        background: linear-gradient(135deg, #0f766e, #14b8a6);
         color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 25px rgba(20, 184, 166, 0.45);
       }
 
       &:hover {
-        background: color.adjust($accent-color-dark, $lightness: 10%);
+        color: $brand-text;
       }
-    }
-
-    button + button {
-      margin-left: 0.5rem;
     }
   }
 
+  // inputs
   input[type="email"],
   input[type="tel"],
   input[type="password"],
   input[type="text"] {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid $neutral-color-medium-light;
-    border-radius: 6px;
-    font-size: 1rem;
-    background: white;
-    color: $font-color-primary;
-    transition: border 0.2s;
+    padding: 0.8rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(55, 65, 81, 0.7);
+    font-size: 0.96rem;
+    background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+    color: $brand-text;
+    transition:
+      border 0.16s ease-out,
+      background 0.16s ease-out,
+      box-shadow 0.16s ease-out;
+
+    &::placeholder {
+      color: rgba(148, 163, 184, 0.85);
+    }
 
     &:focus {
-      outline: 2px solid $accent-color-medium;
-      outline-offset: 2px;
+      outline: none;
+      border-color: $brand-orange;
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4),
+        0 0 30px rgba(247, 147, 26, 0.25);
+    }
+
+    &.invalid {
+      border-color: #f97373;
     }
   }
 
@@ -182,82 +257,89 @@
     .toggle-eye {
       position: absolute;
       top: 50%;
-      right: 0.75rem;
+      right: 0.85rem;
       transform: translateY(-50%);
       background-color: transparent !important;
       border: none;
       cursor: pointer;
       font-size: 1rem;
-    }
-  }
-
-  .terms-checkbox {
-    font-size: 0.85rem;
-    //display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    cursor: pointer;
-    input[type="checkbox"] {
-      margin-top: 3px;
-    }
-
-    a {
-      color: $font-color-link;
+      color: $brand-muted;
 
       &:hover {
-        color: $font-color-link-hover;
+        color: $brand-text;
       }
     }
   }
 
+  // buttons
   .submit-btn,
   .nextButton,
   .backButton {
     width: 100%;
-    padding: 0.85rem;
-    background-color: $tertiary-color;
-    transition: background 0.3s, transform 0.15s;
-
+    padding: 0.9rem 1rem;
     font-weight: 600;
+    border-radius: 999px;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    color: white;
+    box-shadow: 0 18px 40px rgba(248, 181, 45, 0.35);
+    background: radial-gradient(circle at top left, $brand-orange-soft, $brand-orange);
+    color: #111827;
+    letter-spacing: 0.02em;
+    transition:
+      background 0.2s ease-out,
+      transform 0.12s ease-out,
+      box-shadow 0.2s ease-out;
+
     span {
-      color: white;
+      color: inherit;
     }
-    &:hover {
-      background-color: color.adjust($tertiary-color, $lightness: -5%);
-      transform: scale(1.01); // subtle lift effect
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow:
+        0 22px 45px rgba(248, 181, 45, 0.45),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
     }
+
     &:disabled {
-      background: $neutral-color-medium-light;
-      color: $neutral-color-dark;
+      background: rgba(31, 41, 55, 0.9);
+      color: rgba(148, 163, 184, 0.9);
       cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  .backButton {
+    background: transparent;
+    color: $brand-muted;
+    box-shadow: none;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+
+    &:hover:not(:disabled) {
+      background: rgba(15, 23, 42, 0.95);
+      color: $brand-text;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
     }
   }
 
   .divider {
     text-align: center;
-    color: $neutral-color-medium;
-    margin: 2rem 0 1rem;
-    font-size: 0.85rem;
+    color: $brand-muted;
+    margin: 2rem 0 1.3rem;
+    font-size: 0.8rem;
     position: relative;
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 
     &::before,
     &::after {
       content: "";
       position: absolute;
       top: 50%;
-      width: 33%;
+      width: 32%;
       height: 1px;
-      background: $neutral-color-medium-light;
-      opacity: 0.6;
+      background: rgba(51, 65, 85, 0.85);
     }
 
     &::before {
@@ -268,149 +350,82 @@
       right: 0;
     }
   }
-
-  .oauth-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .oauth {
-      flex: 1;
-      padding: 0.6rem;
-      font-weight: 500;
-      border-radius: 6px;
-      border: 1px solid $neutral-color-medium-light;
-      background: white;
-      color: $font-color-primary;
-      cursor: pointer;
-
-      &:hover {
-        background: $neutral-color-light;
-        transform: scale(1.01); // subtle lift effect
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-      }
-
-      &.google::before {
-        content: "🔎 ";
-        color: $accent-color-darkest;
-      }
-
-      &.apple::before {
-        content: " ";
-        color: black;
-      }
-
-      & + .oauth {
-        margin-left: 1rem;
-      }
-    }
-  }
 }
+
+// ───────────────────────────────────────────────
+// Supporting pieces
+// ───────────────────────────────────────────────
 .signin-layout,
 .form-footer,
 input,
 button {
   transition: all 0.2s ease-in-out;
 }
+
 input:focus {
-  box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.2) !important; // brand orange soft glow
+  box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.2) !important;
 }
+
 .form-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: $neutral-color-dark;
-
+  margin-top: 1.6rem;
+  font-size: 0.85rem;
+  color: $brand-muted;
+  padding: 13px;
   a {
     text-decoration: none;
-    color: $font-color-muted;
+    color: $brand-muted;
     margin-right: 1rem;
 
     &:hover {
-      color: $font-color-link;
+      color: $brand-text;
     }
   }
 
   select {
-    padding: 0.25rem;
-    border: 1px solid $neutral-color-medium-light;
-    border-radius: 4px;
-    background: white;
-    color: $font-color-primary;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(55, 65, 81, 0.8);
+    border-radius: 999px;
+    background: $brand-card;
+    color: $brand-text;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 768px) {
-  .signin-top {
-    margin: 0rem;
-    flex-direction: column !important;
-    padding: 0rem;
-  }
-
   .signin-container {
-    padding: 0 1rem;
-
-    .toggle-group {
-      flex-direction: column;
-
-      button + button {
-        margin-left: 0;
-        margin-top: 0.5rem;
-      }
-      button {
-        border-radius: 999px;
-      }
-    }
-
-    .oauth-buttons {
-      flex-direction: column;
-
-      .oauth + .oauth {
-        margin-left: 0;
-        margin-top: 0.75rem;
-      }
-    }
+    padding: 0 0.25rem;
   }
-}
-.step-spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-}
-.step-spinner img {
-  width: 40px;
-  height: 40px;
 }
 
 // progress bar
 .progress-bar-wrapper {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   box-sizing: border-box;
 }
 
 .progress-bar {
-  height: 6px;
-  background-color: #e0e0e0;
-  border-radius: 50px;
+  height: 4px;
+  background-color: rgba(15, 23, 42, 0.3);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: #f7931a; // Neetechs brand color
+  background: linear-gradient(90deg, #fbbf24, #f97316, #f97316);
   width: 0;
   transition: width 0.4s ease;
 }
 
 .progress-text {
-  font-size: 0.875rem;
+  font-size: 0.78rem;
   text-align: right;
   margin-top: 0.25rem;
-  color: #555;
+  color: rgba(15, 23, 42, 0.9);
 }
 
 // phone
@@ -419,66 +434,76 @@ input:focus {
   gap: 0.5rem;
 
   select {
-    padding: 0.75rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid $neutral-color-medium-light;
-    background: white;
-    color: $font-color-primary;
+    padding: 0.8rem 0.75rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(55, 65, 81, 0.7);
+    background: rgba(15, 23, 42, 0.98);
+    color: $brand-text;
   }
 
   input {
     flex: 1;
   }
 }
+
 .verification-note {
-  font-size: 1rem;
+  font-size: 0.95rem;
   text-align: center;
   margin-bottom: 1rem;
+  color: $brand-muted;
 }
 
 input[name="verificationCode"] {
   letter-spacing: 0.3rem;
   text-align: center;
 }
+
 .error {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: -0.5rem;
-  margin-bottom: 0.5rem;
+  color: #f97373;
+  font-size: 0.82rem;
+  margin-top: -0.25rem;
+  margin-bottom: 0.4rem;
 }
-.password-strength {
-  margin-top: -0.5rem;
 
-  .strength-bar {
-    height: 6px;
-    width: 100%;
-    background: #e0e0e0;
-    border-radius: 50px;
-    overflow: hidden;
-    margin-bottom: 0.25rem;
+// loading
+.step-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
 
-    div {
-      height: 100%;
-      transition: width 0.3s ease-in-out;
+.step-spinner img {
+  width: 40px;
+  height: 40px;
+}
+
+// optional: space if you re-enable oauth buttons later
+.oauth-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.9rem;
+
+  .oauth {
+    flex: 1;
+    padding: 0.7rem 0.8rem;
+    font-weight: 500;
+    border-radius: 999px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    background: rgba(15, 23, 42, 0.9);
+    color: $brand-text;
+    cursor: pointer;
+    font-size: 0.9rem;
+
+    &:hover {
+      background: rgba(15, 23, 42, 1);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.85);
     }
 
-    .weak {
-      background: #e53935;
+    & + .oauth {
+      margin-left: 0;
     }
-    .moderate {
-      background: #fb8c00;
-    }
-    .strong {
-      background: #43a047;
-    }
-    .very-strong {
-      background: #1e88e5;
-    }
-  }
-
-  .strength-label {
-    font-size: 0.85rem;
-    color: #666;
   }
 }

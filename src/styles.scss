@@ -1,116 +1,143 @@
 /* You can add global styles to this file, and also import other style files */
 @use './styles._variables.scss' as *;
 
-$container-padding-desktop: 20px;
-$container-padding-tablet: 12px;
-$container-padding-mobile: 8px;
+// src/styles/styles.scss
 
-*{
+* {
   margin: 0;
   padding: 0;
-  // box-sizing: border-box;
   box-sizing: border-box;
-  overflow-x: hidden;
-  transition: all 0.2s ease-in-out;
-
+  // overflow-x: hidden;
+  // ❌ removed align-items: center; it was messing with all flex layouts
 }
+
 html {
-  box-sizing: border-box;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  scroll-padding-top: 100px; // Match your fixed header height
 }
 
-*, *::before, *::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-header{
+header {
   z-index: 100;
 }
-body{
-    font-family: "Noto Naskh Arabic", serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    background-color: $neutral-color-light;
-    color: $font-color-paragraph;  // Default paragraph color
-    padding: 0px;
-    margin: 0px;
 
-    
-    // background-color: hsl(208, 90%, 4%);
-
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #020617; // deep slate
+  color: #e5e7eb; // Default paragraph color
+  padding: 0;
+  margin: 0;
+  // background-color: hsl(208, 90%, 4%);
 }
+ 
 .button {
   background-color: $secondary-color;
+
   &:hover {
     background-color: $tertiary-color;
   }
 }
 
-li a{
-    text-decoration: none!important;
-    color: aliceblue;
-    &:hover {
-      text-decoration: underline;
-    }
-}
+.cta-button {
+  background-color: $tertiary-color;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin-top: 16px;
 
-
-
-.container-card {
-  padding: $container-padding-desktop;
-  //max-width: 800px;
-  margin: 0 auto;
-  margin-bottom: 64px;
-  margin-top: 64px;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  align-items: flex-start;
-
-  @media (max-width: 800px) {
-    padding: $container-padding-tablet;
-  }
-
-  @media (max-width: 480px) {
-    padding: $container-padding-mobile;
+  &:hover {
+    background-color: $quaternary-color;
   }
 }
 
+h2 {
+  // keep empty for now, heading styles are in your font file
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  text-decoration: none !important;
+  color: aliceblue;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// .container-card {
+//   margin: 0 auto;
+//   margin-bottom: 64px;
+//   margin-top: 64px;
+//   padding: 20px;
+//   background: #fff;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+//   max-width: 1200px;
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-content: center;
+//   justify-content: center;
+//   align-items: flex-start;
+// }
 
 .container {
-    max-width: 1200px;
-    margin: 64px auto;
-    padding: 0px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0; // optional
+  margin-bottom: 0; // optional
+  padding: 0;
+}
+.hero-section {
+  padding: $space-7 4vw;
+  font-family: $font-family-base;
+}
+
+.hero-title {
+  font-size: $font-size-3xl;
+  line-height: $line-height-tight;
+}
+
+.hero-card {
+  border-radius: $radius-lg;
+  box-shadow: $shadow-medium;
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .col {
-    flex: 1;
-    padding: 0px;
+  flex: 1;
+  padding: 0;
 }
-
 
 .flex-reverse {
   flex-direction: row-reverse;
-
 }
 
 //* Global random *//
-hr, br{
+hr,
+br {
   margin: 64px 0;
   width: 100%;
 }
-.display_none{
+
+.display_none {
   display: none;
+}
+
+@media (max-width: 800px) {
+  .container-card {
+    width: 100%;
+    padding: 0;
+  }
 }

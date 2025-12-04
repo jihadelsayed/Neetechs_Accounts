@@ -1,33 +1,64 @@
-@use "./styles._variables.scss" as *;
+@use './styles._variables.scss' as *;
 
-/* styles.css or any global CSS file */
+/* Toast Container */
 .toast {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  // background-color: #333;
-  // color: #fff;
   background-color: $highlight-color;
   color: $neutral-color-darkest;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 999px;
   opacity: 0;
-  transition: opacity 0.5s, bottom 0.5s;
+  pointer-events: none;
+  transition: opacity 0.3s ease, bottom 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  border: 1px solid $highlight-secondary-color;
 }
 
+/* Visible state */
 .toast.show {
   opacity: 1;
   bottom: 40px;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
+/* Variants */
 .toast-success {
-  background-color: #4caf50;
+  background-color: $highlight-quaternary-color;
+  color: #ffffff;
+  border-color: $highlight-quinary-color;
 }
 
 .toast-error {
-  background-color: #f44336;
+  background-color: $level-bonus-color; // red tone from palette
+  color: #ffffff;
+  // border-color: darken($level-bonus-color, 5%);
 }
+
 .toast-info {
-  background-color: #2196f3;
+  background-color: $accent-color-medium;
+  color: #ffffff;
+  border-color: $accent-color-medium-dark;
+}
+
+/* Optional icon slot if you add icons later */
+.toast__icon {
+  flex-shrink: 0;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .toast {
+    max-width: calc(100% - 32px);
+    padding: 10px 16px;
+    font-size: 13px;
+  }
 }

@@ -6,4 +6,12 @@ export const environment = {
   //CHAT_URL: "wss://server."+ window.location.hostname.replace(/^[^.]+./, '') +"/ws/chat/",
   //SERVER_URL: "https://server."+ window.location.hostname.replace(/^[^.]+./, '') +"/",
   //MainDomain: window.location.hostname.replace(/^[^.]+./, ''),
-};
+ MY_ACCOUNT_URL: "https://myaccount.neetechs.com/",
+  SERVER_URL: "https://server.neetechs.com/",
+  CHAT_URL: "wss://server.neetechs.com/ws/chat/",
+  FrontEnd_URL: "https://neetechs.com",
+  LoginURL: "https://accounts.neetechs.com/",
+  JSON_URL: 'https://raw.githubusercontent.com/jihadelsayed/neetechs/main/json/',
+
+}
+;

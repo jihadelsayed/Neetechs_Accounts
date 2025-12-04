@@ -1,0 +1,43 @@
+<div class="stepDev">
+  <p class="verification-note">
+    We sent a verification code to {{ formattedPhone }}.
+  </p>
+
+  <input
+    type="text"
+    name="verificationCode"
+    [(ngModel)]="verificationCode"
+    maxlength="6"
+    placeholder="Enter code"
+  />
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  <button
+    type="button"
+    class="submit-btn"
+    (click)="verifyCode()"
+    [disabled]="loading || !verificationCode"
+  >
+    @if (!loading) {
+      <span>Verify</span>
+    } @else {
+      <span>Verifying...</span>
+    }
+  </button>
+
+  <button
+    type="button"
+    class="nextButton"
+    (click)="resendCode()"
+    [disabled]="!canResend || loading"
+  >
+    @if (canResend) {
+      <span>Resend code</span>
+    } @else {
+      <span>Resend in {{ resendCooldown }}s</span>
+    }
+  </button>
+</div>

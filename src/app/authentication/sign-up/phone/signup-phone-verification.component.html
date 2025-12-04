@@ -1,0 +1,30 @@
+<div class="stepDev">
+  <p class="verification-note">
+    We've sent a 6-digit code to {{ formattedPhone }}.
+    Please enter it below to verify your number.
+  </p>
+
+  <input
+    type="text"
+    maxlength="6"
+    [(ngModel)]="phoneService.phoneVerificationCode"
+    name="verificationCode"
+    placeholder="Enter verification code"
+    required
+    autocomplete="one-time-code"
+  />
+
+  @if (phoneService.phoneVerificationError) {
+    <div class="error">
+      {{ phoneService.phoneVerificationError }}
+    </div>
+  }
+
+  <button type="button" class="backButton" (click)="onBack()">
+    Back
+  </button>
+
+  <button type="button" class="nextButton" (click)="onVerify()">
+    Verify & Continue
+  </button>
+</div>

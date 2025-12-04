@@ -1,72 +1,155 @@
 // src/styles/_variables.scss
 
+// =======================
 // Brand Color Scheme
-$primary-color: #fff3e0; // Light background
-$secondary-color: #ffb74d; // Soft orange
-$tertiary-color: #f7931a; // Brand orange
-$quaternary-color: #ef6c00; // Strong accent orange
-$quinary-color: #e65100; // Darker action tone
-$senary-color: #bf360c; // Deep tone
-$septenary-color: #8b2b00; // Base dark
+// =======================
+$primary-color: #FFF3E0;               // Soft warm background
+$secondary-color: #FFB74D;             // Soft orange (buttons / accents)
+$tertiary-color: #F7931A;              // Main brand orange
+$quaternary-color: #EF6C00;            // Strong accent orange
+$quinary-color: #E65100;               // Darker action tone
+$senary-color: #BF360C;                // Deep tone
+$septenary-color: #8B2B00;             // Base dark
 
-// Highlight (Positive Actions & Attention)
-$highlight-color: #e3fcec; // Soft success background
-$highlight-secondary-color: #a7f3d0;
-$highlight-tertiary-color: #34d399;
-$highlight-quaternary-color: #10b981;
+// =======================
+// Highlight (Success / Positive / Attention)
+// =======================
+$highlight-color: #E3FCEC;             // Soft success background
+$highlight-secondary-color: #A7F3D0;
+$highlight-tertiary-color: #34D399;
+$highlight-quaternary-color: #10B981;
 $highlight-quinary-color: #059669;
 $highlight-senary-color: #047857;
-$highlight-septenary-color: #065f46;
+$highlight-septenary-color: #065F46;
 
-// Accent (Cool Colors for UI accents or secondary CTAs)
-$accent-color-light: #e0f7fa;
-$accent-color-medium-light: #b2ebf2;
-$accent-color-medium: #26c6da;
-$accent-color-medium-dark: #00acc1;
-$accent-color-dark: #0097a7;
+// =======================
+// Accent (Cool Accents / Secondary CTAs)
+// =======================
+$accent-color-light: #E0F7FA;
+$accent-color-medium-light: #B2EBF2;
+$accent-color-medium: #26C6DA;
+$accent-color-medium-dark: #00ACC1;
+$accent-color-dark: #0097A7;
 $accent-color-darker: #006064;
-$accent-color-darkest: #004d40;
+$accent-color-darkest: #004D40;
 
+// =======================
 // Neutrals (Backgrounds / Borders / Base UI)
-$neutral-color-light: #f5f5f5;
-$neutral-color-medium-light: #e0e0e0;
-$neutral-color-medium: #bdbdbd;
-$neutral-color-medium-dark: #9e9e9e;
-$neutral-color-dark: #616161;
-$neutral-color-darker: #424242;
-$neutral-color-darkest: #212121;
+// =======================
+$neutral-color-light: #F5F5F5;           // Page background
+$neutral-color-medium-light: #E0E0E0;    // Subtle borders
+$neutral-color-medium: #BDBDBD;          // Disabled text / icons
+$neutral-color-medium-dark: #9E9E9E;     // Muted text
+$neutral-color-dark: #616161;            // Body text secondary
+$neutral-color-darker: #424242;          // Strong text
+$neutral-color-darkest: #212121;         // Titles / high contrast
 
-// Font Colors
+// =======================
+// Typography Colors
+// =======================
 $font-color-primary: #212121;
 $font-color-secondary: #424242;
 $font-color-tertiary: #616161;
 
-$font-color-accent-light: #34d399;
-$font-color-accent: #10b981;
+$font-color-accent-light: #34D399;
+$font-color-accent: #10B981;
 $font-color-accent-dark: #059669;
 
-$font-color-highlight: #facc15; // Bright yellow highlight
-$font-color-muted: #9e9e9e;
+$font-color-highlight: #FACC15; // Bright yellow highlight
+$font-color-muted: #9E9E9E;
 
-// Headings Font Colors
+// Headings
 $font-color-h1: $font-color-primary;
 $font-color-h2: $font-color-secondary;
 $font-color-h3: $font-color-tertiary;
 
-// Paragraph Font Colors
+// Paragraphs
 $font-color-paragraph: $font-color-secondary;
 
-// Link Font Colors
+// Links
 $font-color-link: $font-color-accent;
 $font-color-link-hover: $font-color-accent-dark;
 
-// Tutorial Color Tags
-$intro-color: #3498db; // Blue
-$basics-color: #2ecc71; // Green
-$styling-color: #9b59b6; // Purple
-$advanced-color: #f1c40f; // Yellow
-$projects-color: #e67e22; // Orange
-$bonus-color: #e74c3c; // Red
+// =======================
+// Category / Level Accent Colors
+// =======================
+$level-intro-color: #3498db;      // Blue
+$level-basics-color: #2ecc71;     // Green
+$level-styling-color: #9b59b6;    // Purple
+$level-advanced-color: #f1c40f;   // Yellow
+$level-projects-color: #e67e22;   // Orange
+$level-bonus-color: #e74c3c;      // Red (also used for error toast)
 
-$card-bg: #ecf0f1; // Card background
-$section-bg: $neutral-color-light; // Was #f5f5f5
+// =======================
+// Shared UI Backgrounds
+// =======================
+$card-background: #ffffff;
+$section-background: $neutral-color-light;
+
+// =======================
+// Layout Tokens (new helpers)
+// =======================
+$body-bg: $neutral-color-light;
+$body-color: $font-color-paragraph;
+
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-pill: 999px;
+
+$shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.06);
+$shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.10);
+$shadow-strong: 0 16px 40px rgba(0, 0, 0, 0.16);
+
+
+/* ============================
+   Neutral Color System (Dark UI)
+   ============================ */
+
+$neutral-color-darkest: #0b0f19;         // Page background / deep surface
+$neutral-color-darker:  #111827;         // Cards, glass layers
+$neutral-color-dark:    #1e293b;         // Borders, subtle surfaces
+$neutral-color-medium:  #334155;         // Muted text
+$neutral-color-medium-light: #94a3b8;    // Menu links (inactive)
+$neutral-color-light:   #cbd5e1;         // Placeholders, soft text
+$neutral-color-lightest:#f8fafc;         // Pure light text (white-ish)
+
+
+/* === Spacing scale === */
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 40px;
+$space-8: 56px;
+
+/* === Border radius === */
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 18px;
+$radius-xl: 24px;
+$radius-full: 999px;
+
+/* === Shadows (for cards, drawers, buttons) === */
+$shadow-soft: 0 8px 18px rgba(15, 23, 42, 0.45);
+$shadow-medium: 0 14px 30px rgba(15, 23, 42, 0.65);
+$shadow-strong: 0 22px 45px rgba(15, 23, 42, 0.8);
+
+/* === Typography tokens === */
+$font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Inter',
+  sans-serif;
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.375rem;
+$font-size-2xl: 1.75rem;
+$font-size-3xl: 2.25rem;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.7;

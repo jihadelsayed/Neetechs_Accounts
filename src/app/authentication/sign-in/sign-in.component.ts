@@ -1,42 +1,47 @@
-import {
-  isPlatformBrowser,
-  CommonModule,
-} from '@angular/common';
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
-import {
-  FormsModule,
-  NgForm,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  RouterModule,
-} from '@angular/router';
-import { UserService } from '../services/user.service';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { PhoneService } from '../services/phone-service.service';
 import { PasswordService } from '../services/password-service.service';
 import { WebAuthnService } from '../services/webauthn.service';
+import { AuthService } from '@/services/auth.service';
+import { BiometricLoginButtonComponent } from './biometric/biometric-login-button.component';
+import { SocialLoginButtonsComponent } from './social/social-login-buttons.component';
+import { PhoneOtpLoginComponent } from './phone/phone-otp-login.component';
+
+interface LoginUser {
+  email: string;
+  phone: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    // BiometricLoginButtonComponent,
+    // SocialLoginButtonsComponent,
+    PhoneOtpLoginComponent
+  ],
   providers: [CookieService],
 })
 export class SignInComponent implements OnInit {
+  // ───────────────────────────────────────────────
+  // State
+  // ───────────────────────────────────────────────
   resendCooldown = 60;
   resendTimer: any;
   canResend = true;
 
-  loginUser: any = {
+  loginUser: LoginUser = {
     email: '',
     phone: '',
     password: '',
@@ -56,16 +61,22 @@ export class SignInComponent implements OnInit {
   pathname: string | null = null;
   returnUrl: string | null = null;
 
+  // ───────────────────────────────────────────────
+  // DI
+  // ───────────────────────────────────────────────
   constructor(
-    private userService: UserService,
     private route: ActivatedRoute,
     private cookie: CookieService,
     @Inject(PLATFORM_ID) private platformId: Object,
     public phoneService: PhoneService,
     public passwordService: PasswordService,
-    private webauthnService: WebAuthnService
+    private webauthnService: WebAuthnService,
+    private authService: AuthService
   ) {}
 
+  // ───────────────────────────────────────────────
+  // Lifecycle
+  // ───────────────────────────────────────────────
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: any) => {
       this.host = params['host'] ?? null;
@@ -78,7 +89,10 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  startCooldown(seconds: number = 60) {
+  // ───────────────────────────────────────────────
+  // Step / cooldown logic
+  // ───────────────────────────────────────────────
+  startCooldown(seconds: number = 60): void {
     this.canResend = false;
     this.resendCooldown = seconds;
     this.resendTimer = setInterval(() => {
@@ -104,93 +118,117 @@ export class SignInComponent implements OnInit {
         this.selectedCountry,
         this.loginUser.phone
       );
-      return !!this.loginUser.phone && this.phoneService.isValidPhone(fullPhone);
+      return (
+        !!this.loginUser.phone && this.phoneService.isValidPhone(fullPhone)
+      );
     }
   }
 
+  // ───────────────────────────────────────────────
+  // Main login submit
+  // ───────────────────────────────────────────────
   onLoginSubmit(form: NgForm): void {
     if (!isPlatformBrowser(this.platformId)) return;
     if (!form.valid) return;
+    if (!this.loginUser.password) return;
 
-    let payload: any;
-    if (this.loginUseEmail) {
-      payload = {
-        email: this.loginUser.email,
-        password: this.loginUser.password,
-      };
-    } else {
-      payload = {
-        phone: this.phoneService.getFullPhoneNumber(
-          this.selectedCountry,
-          this.loginUser.phone
-        ),
-        password: this.loginUser.password,
-      };
-    }
+    const identifier = this.buildLoginIdentifier();
 
     this.loginLoading = true;
+    this.loginError = '';
 
-    this.userService.userAuthentication(payload).subscribe(
-      (data: any) => {
-        // store user info in browser only
-        localStorage.setItem('userToken', data.token);
-        localStorage.setItem('UserInfo', JSON.stringify(data.user));
-        this.cookie.set('userToken', data.token);
-        this.cookie.set('UserInfo', JSON.stringify(data.user));
-
-        console.log('LOGIN success, returnUrl =', this.returnUrl);
-
-        // 1️⃣ Prefer explicit return_url
-        if (this.returnUrl) {
-          let target = this.returnUrl;
-          try {
-            target = decodeURIComponent(this.returnUrl);
-          } catch {}
-          console.log('Redirecting to', target);
-          window.location.href = target;
-          return;
-        }
-
-        // 2️⃣ Fallback: main site home
-        const fallback = 'https://neetechs.com/en/';
-        console.log('No return_url, redirecting to', fallback);
-        window.location.href = fallback;
-      },
-      (error: any) => {
-        this.loginLoading = false;
-        let msg = 'Login failed';
-
-        if (error.status === 400) {
-          if (error.error['non_field_errors'])
-            msg = error.error['non_field_errors'];
-          else if (error.error['email']) msg = error.error['email'];
-          else if (error.error['phone']) msg = error.error['phone'];
-          else if (error.error['password']) msg = error.error['password'];
-        } else if (error.message) {
-          msg = error.message;
-        }
-
-        console.log('LOGIN error', error);
-        this.loginError = msg;
-      }
-    );
-  }
-
-  loginWithBiometric() {
-    if (!isPlatformBrowser(this.platformId)) return;
-    const userId = JSON.parse(localStorage.getItem('UserInfo') || '{}').id;
-    this.webauthnService
-      .login(userId)
-      .then((res) => {
-        localStorage.setItem('userToken', res.token);
-        // you might want to use returnUrl here too later
-        window.location.href = this.returnUrl || 'https://neetechs.com/en/';
-      })
-      .catch((err) => {
-        console.error('Biometric login failed', err);
+    this.authService
+      .login({ identifier, password: this.loginUser.password })
+      .subscribe({
+        next: (data: any) => {
+          this.loginLoading = false;
+          this.storeSession(data);
+          this.redirectAfterLogin();
+        },
+        error: (error: any) => {
+          this.loginLoading = false;
+          console.log('LOGIN error', error);
+          this.loginError = this.extractLoginError(error);
+        },
       });
   }
 
+  // Build identifier string used by backend (email or full phone)
+  private buildLoginIdentifier(): string {
+    if (this.loginUseEmail) {
+      return this.loginUser.email;
+    }
+    return this.phoneService.getFullPhoneNumber(
+      this.selectedCountry,
+      this.loginUser.phone
+    );
+  }
+
+  // Persist token + user in both localStorage and cookies (for compatibility)
+  private storeSession(data: any): void {
+    if (!data) return;
+
+    if (data.token) {
+      localStorage.setItem('userToken', data.token);
+      this.cookie.set('userToken', data.token);
+    }
+
+    if (data.user) {
+      const userJson = JSON.stringify(data.user);
+      localStorage.setItem('UserInfo', userJson);
+      this.cookie.set('UserInfo', userJson);
+    }
+  }
+
+  // Handle post-login redirects (return_url or fallback)
+  private redirectAfterLogin(): void {
+    console.log('LOGIN success, returnUrl =', this.returnUrl);
+
+    // 1️⃣ Prefer explicit return_url
+    if (this.returnUrl) {
+      let target = this.returnUrl;
+      try {
+        target = decodeURIComponent(this.returnUrl);
+      } catch {}
+      console.log('Redirecting to', target);
+      window.location.href = target;
+      return;
+    }
+
+    // 2️⃣ Fallback: main site home
+    const fallback = 'https://neetechs.com/en/';
+    console.log('No return_url, redirecting to', fallback);
+    window.location.href = fallback;
+  }
+
+  // Extract user-friendly error message from backend response
+  private extractLoginError(error: any): string {
+    let msg = 'Login failed';
+
+    if (!error) return msg;
+
+    if (error.status === 0) {
+      return 'Connection error, please try again.';
+    }
+
+    const e = error.error || error;
+
+    if (e.non_field_errors) {
+      return Array.isArray(e.non_field_errors)
+        ? e.non_field_errors.join(', ')
+        : e.non_field_errors;
+    }
+    if (e.email) return e.email;
+    if (e.phone) return e.phone;
+    if (e.password) return e.password;
+    if (e.detail) return e.detail;
+
+    return error.message || msg;
+  }
+
+  // ───────────────────────────────────────────────
+  // Validation helpers
+  // ───────────────────────────────────────────────
   isValidEmail(email: string): boolean {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -207,49 +245,12 @@ export class SignInComponent implements OnInit {
     );
   }
 
-  loginWithGoogle() {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.location.href =
-      'https://neetechs.com/auth/google/?process=login';
-  }
+  // ───────────────────────────────────────────────
+  // OTP login via PhoneService
+  // ───────────────────────────────────────────────
+sendLoginOtp(): void {
+  this.loginStep = 1.5;
+}
 
-  loginWithFacebook() {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.location.href =
-      'https://neetechs.com/auth/facebook/?process=login';
-  }
 
-  sendLoginOtp() {
-    this.phoneService.sendVerificationCode(
-      this.selectedCountry,
-      this.loginUser.phone,
-      () => {
-        this.loginStep = 1.5;
-        this.startCooldown();
-      }
-    );
-  }
-
-  verifyLoginOtp() {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    this.phoneService.verifyCode(
-      this.selectedCountry,
-      this.loginUser.phone,
-      this.phoneService.phoneVerificationCode,
-      (hasPassword) => {
-        if (this.returnUrl) {
-          let target = this.returnUrl;
-          try {
-            target = decodeURIComponent(this.returnUrl);
-          } catch {}
-          window.location.href = target;
-          return;
-        }
-
-        const fallback = 'https://neetechs.com/en/';
-        window.location.href = fallback;
-      }
-    );
-  }
 }

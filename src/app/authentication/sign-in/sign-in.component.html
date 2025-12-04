@@ -4,7 +4,8 @@
       <!-- Left Panel -->
       <div class="left-panel">
         <img src="https://i.imgur.com/3fLGfPn.png" alt="Neetechs Logo" />
-        <h2 class="step-indicator">Welcome Back to Neetechs</h2>
+
+        <h2 class="step-indicator">WELCOME BACK TO NEETECHS</h2>
         <p class="login-link">
           Don't have an account? <a routerLink="/signup">Sign Up</a>
         </p>
@@ -18,164 +19,181 @@
       </div>
 
       <!-- Right Panel (Form) -->
-      <div class="right-panel signin-container">
-        @if (!loginLoading) {
-          <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
-            <!-- Step 1: Email or Phone -->
-            @if (loginStep === 1) {
-              <div class="stepDev">
-                <p class="toggle-note">
-                  Log in using your email or mobile number.
-                </p>
+      <div class="right-panel">
+        <div class="signin-container">
+          <h5>Log in using your email or mobile number.</h5>
 
-                <div class="toggle-group">
-                  <button
-                    type="button"
-                    [class.active]="!loginUseEmail"
-                    (click)="loginUseEmail = false"
-                  >
-                    Mobile Number
-                  </button>
-                  <button
-                    type="button"
-                    [class.active]="loginUseEmail"
-                    (click)="loginUseEmail = true"
-                  >
-                    Email
-                  </button>
-                </div>
+          @if (!loginLoading) {
+            <!-- Steps 1 & 2: inside form -->
+            @if (loginStep === 1 || loginStep === 2) {
+              <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
+                <!-- Step 1: Email or Phone -->
+                @if (loginStep === 1) {
+                  <div class="stepDev">
+                    <p class="toggle-note">
+                      Log in using your email or mobile number.
+                    </p>
 
-                @if (loginUseEmail) {
-                  <div>
-                    <input
-                      type="email"
-                      name="loginEmail"
-                      [(ngModel)]="loginUser.email"
-                      placeholder="Email"
-                      required
-                      autocomplete="email"
-                      #loginEmailRef="ngModel"
-                      [class.invalid]="
-                        loginEmailRef.invalid && loginEmailRef.touched
-                      "
-                    />
-                    @if (loginEmailRef.invalid && loginEmailRef.touched) {
-                      <div class="error">Invalid email address</div>
-                    }
-                  </div>
-                } @else {
-                  <div class="phone-group">
-                    <select
-                      [(ngModel)]="selectedCountry"
-                      name="loginCountry"
-                      required
-                    >
-                      @for (c of phoneService.countries; track c.code) {
-                        <option [value]="c.code">
-                          {{ c.flag }} +{{ c.dialCode }}
-                        </option>
-                      }
-                    </select>
+                    <div class="toggle-group">
+                      <button
+                        type="button"
+                        [class.active]="!loginUseEmail"
+                        (click)="loginUseEmail = false"
+                      >
+                        Mobile Number
+                      </button>
+                      <button
+                        type="button"
+                        [class.active]="loginUseEmail"
+                        (click)="loginUseEmail = true"
+                      >
+                        Email
+                      </button>
+                    </div>
 
-                    <input
-                      type="tel"
-                      name="loginPhone"
-                      [(ngModel)]="loginUser.phone"
-                      required
-                      #loginPhoneRef="ngModel"
-                      [class.invalid]="
+                    @if (loginUseEmail) {
+                      <div>
+                        <input
+                          type="email"
+                          name="loginEmail"
+                          [(ngModel)]="loginUser.email"
+                          placeholder="Email"
+                          required
+                          autocomplete="email"
+                          #loginEmailRef="ngModel"
+                          [class.invalid]="
+                            loginEmailRef.invalid && loginEmailRef.touched
+                          "
+                        />
+                        @if (loginEmailRef.invalid && loginEmailRef.touched) {
+                          <div class="error">Invalid email address</div>
+                        }
+                      </div>
+                    } @else {
+                      <div class="phone-group">
+                        <select
+                          [(ngModel)]="selectedCountry"
+                          name="loginCountry"
+                          required
+                        >
+                          @for (c of phoneService.countries; track c.code) {
+                            <option [value]="c.code">
+                              {{ c.flag }} +{{ c.dialCode }}
+                            </option>
+                          }
+                        </select>
+
+                        <input
+                          type="tel"
+                          name="loginPhone"
+                          [(ngModel)]="loginUser.phone"
+                          required
+                          #loginPhoneRef="ngModel"
+                          [class.invalid]="
+                            (loginPhoneRef.invalid ||
+                              !isValidPhone(
+                                phoneService.getFullPhoneNumber(
+                                  selectedCountry,
+                                  loginUser.phone
+                                )
+                              )) &&
+                            phoneTouched
+                          "
+                          (blur)="phoneTouched = true"
+                          placeholder="Mobile number"
+                        />
+                      </div>
+
+                      @if (
                         (loginPhoneRef.invalid ||
                           !isValidPhone(
                             phoneService.getFullPhoneNumber(
-                              this.selectedCountry,
-                              this.loginUser.phone
+                              selectedCountry,
+                              loginUser.phone
                             )
                           )) &&
                         phoneTouched
-                      "
-                      (blur)="phoneTouched = true"
-                      placeholder="Mobile number"
-                    />
+                      ) {
+                        <div class="error">Invalid phone number</div>
+                      }
+                    }
+
+                    <button
+                      type="button"
+                      class="nextButton"
+                      (click)="nextLoginStep()"
+                      [disabled]="!isLoginStep1Valid()"
+                    >
+                      Next
+                    </button>
                   </div>
-
-                  @if (
-                    (loginPhoneRef.invalid ||
-                      !isValidPhone(
-                        phoneService.getFullPhoneNumber(
-                          this.selectedCountry,
-                          this.loginUser.phone
-                        )
-                      )) &&
-                    phoneTouched
-                  ) {
-                    <div class="error">Invalid phone number</div>
-                  }
                 }
 
-                <button
-                  type="button"
-                  class="nextButton"
-                  (click)="nextLoginStep()"
-                  [disabled]="!isLoginStep1Valid()"
-                >
-                  Next
-                </button>
-              </div>
-            }
+                <!-- Step 2: Password -->
+                @if (loginStep === 2) {
+                  <div class="stepDev">
+                    <div class="password-group">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        name="loginPassword"
+                        [(ngModel)]="loginUser.password"
+                        placeholder="Password"
+                        required
+                        autocomplete="current-password"
+                      />
+                      <button
+                        type="button"
+                        (click)="showPassword = !showPassword"
+                        class="toggle-eye"
+                      >
+                        dY`?
+                      </button>
+                    </div>
 
-            <!-- Step 2: Password -->
-            @if (loginStep === 2) {
-              <div class="stepDev">
-                <div class="password-group">
-                  <input
-                    [type]="showPassword ? 'text' : 'password'"
-                    name="loginPassword"
-                    [(ngModel)]="loginUser.password"
-                    placeholder="Password"
-                    required
-                    autocomplete="current-password"
-                  />
-                  <button
-                    type="button"
-                    (click)="showPassword = !showPassword"
-                    class="toggle-eye"
-                  >
-                    dY`?
-                  </button>
-                </div>
-                @if (loginError) {
-                  <div class="error">{{ loginError }}</div>
+                    @if (loginError) {
+                      <div class="error">{{ loginError }}</div>
+                    }
+
+                    <button
+                      type="button"
+                      class="backButton"
+                      (click)="loginStep = 1"
+                    >
+                      Back
+                    </button>
+                    <button type="submit" class="submit-btn">
+                      @if (!loginLoading) {
+                        <span>Login</span>
+                      } @else {
+                        <span>Logging in...</span>
+                      }
+                    </button>
+                  </div>
                 }
-                <button type="button" class="backButton" (click)="loginStep = 1">
-                  Back
-                </button>
-                <button type="submit" class="submit-btn">
-                  @if (!loginLoading) {
-                    <span>Login</span>
-                  } @else {
-                    <span>Logging in...</span>
-                  }
-                </button>
-              </div>
+              </form>
             }
-          </form>
-        } @else {
-          <div class="step-spinner">
-            <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading..." />
-          </div>
-        }
 
-        <div class="divider">Or continue with</div>
-        <div class="oauth-buttons">
-          <button type="button" class="oauth google" (click)="loginWithGoogle()"
-            >Google</button
-          >
-          <button type="button" class="oauth apple">Apple</button>
-          
+            <!-- Step 1.5: OTP verification -->
+            @if (loginStep === 1.5) {
+              <app-phone-otp-login
+                [selectedCountry]="selectedCountry"
+                [phone]="loginUser.phone"
+                [returnUrl]="returnUrl"
+              ></app-phone-otp-login>
+            }
+          } @else {
+            <div class="step-spinner">
+              <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading..." />
+            </div>
+          }
+
+          <!-- If you want social / biometric later, put them here under the form -->
+          <!--
+          <div class="divider">Or continue with</div>
+          <app-social-login-buttons></app-social-login-buttons>
+          <app-biometric-login-button [returnUrl]="returnUrl"></app-biometric-login-button>
+          -->
         </div>
-<button type="button" (click)="loginWithBiometric()">dY"? Login with Face/Touch ID</button>
-
-
       </div>
     </div>
 

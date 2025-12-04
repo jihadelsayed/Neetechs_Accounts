@@ -14,14 +14,15 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { PhoneService } from '../services/phone-service.service';
 import { PasswordService } from '../services/password-service.service';
-import { DeviceIdService } from '../services/device-id.service';
-
+import { SocialLoginButtonsComponent } from '../sign-in/social/social-login-buttons.component';
+import { SignupPhoneVerificationComponent } from './phone/signup-phone-verification.component';
+import { SignupPasswordStepComponent } from './password/signup-password-step.component';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule,SignupPasswordStepComponent , FormsModule, RouterModule, SocialLoginButtonsComponent, SignupPhoneVerificationComponent],
 })
 export class SignUpComponent implements OnInit {
   selectedCountry = 'US';
@@ -56,13 +57,11 @@ export class SignUpComponent implements OnInit {
   step = 1;
   stepLoading = false;
 
-  private intervalId: any;
 
   constructor(
     private userService: UserService,
     public phoneService: PhoneService,
     public passwordService: PasswordService,
-    private deviceIdService: DeviceIdService,
     private route: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
@@ -79,10 +78,6 @@ export class SignUpComponent implements OnInit {
 
       console.log('SIGNUP INIT params', params, 'returnUrl =', this.returnUrl);
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.intervalId) clearInterval(this.intervalId);
   }
 
   // ===== PHONE VERIFY FLOW =====
@@ -238,16 +233,5 @@ export class SignUpComponent implements OnInit {
     this.strengthClass = result.strengthClass;
   }
 
-  // ===== SOCIAL =====
-  loginWithGoogle() {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.location.href =
-      'https://neetechs.com/auth/google/?process=login';
-  }
 
-  loginWithFacebook() {
-    if (!isPlatformBrowser(this.platformId)) return;
-    window.location.href =
-      'https://neetechs.com/auth/facebook/?process=login';
-  }
 }
