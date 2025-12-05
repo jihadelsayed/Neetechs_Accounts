@@ -141,3 +141,14 @@ br {
     padding: 0;
   }
 }
+.step-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.step-spinner img {
+  width: 100px;
+}

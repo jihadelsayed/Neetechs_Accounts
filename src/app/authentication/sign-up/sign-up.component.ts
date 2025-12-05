@@ -17,12 +17,20 @@ import { PasswordService } from '../services/password-service.service';
 import { SocialLoginButtonsComponent } from '../sign-in/social/social-login-buttons.component';
 import { SignupPhoneVerificationComponent } from './phone/signup-phone-verification.component';
 import { SignupPasswordStepComponent } from './password/signup-password-step.component';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
   standalone: true,
-  imports: [CommonModule,SignupPasswordStepComponent , FormsModule, RouterModule, SocialLoginButtonsComponent, SignupPhoneVerificationComponent],
+  imports: [
+    CommonModule,
+    SignupPasswordStepComponent,
+    FormsModule,
+    RouterModule,
+    SocialLoginButtonsComponent,
+    SignupPhoneVerificationComponent,
+  ],
 })
 export class SignUpComponent implements OnInit {
   selectedCountry = 'US';
@@ -57,6 +65,8 @@ export class SignUpComponent implements OnInit {
   step = 1;
   stepLoading = false;
 
+  /** UI error banner */
+  globalError: string | null = null;
 
   constructor(
     private userService: UserService,
@@ -82,17 +92,17 @@ export class SignUpComponent implements OnInit {
 
   // ===== PHONE VERIFY FLOW =====
   verifyCode() {
+    this.clearGlobalError();
+
     this.phoneService.verifyCode(
       this.selectedCountry,
       this.user.phone,
       this.phoneService.phoneVerificationCode,
       (hasPassword: boolean) => {
-        // user already has a password -> just redirect back
         if (hasPassword) {
           const target = this.getRedirectTarget();
           window.location.href = target;
         } else {
-          // no password yet -> go to password step
           this.step = 2;
         }
       }
@@ -120,23 +130,30 @@ export class SignUpComponent implements OnInit {
     this.passwordStrength = { percent: 0, label: '', strengthClass: '' };
     this.strengthClass = '';
     this.step = 1;
+    this.globalError = null;
+  }
+
+  clearGlobalError() {
+    this.globalError = null;
   }
 
   // ===== STEPS NAV =====
   nextStep() {
+    this.clearGlobalError();
     if (this.step < 3) this.step++;
   }
 
   prevStep() {
+    this.clearGlobalError();
     if (this.step > 1) this.step--;
   }
 
   nextStepWithSpinner() {
+    this.clearGlobalError();
     this.stepLoading = true;
 
     setTimeout(() => {
       if (this.step === 1 && !this.useEmail) {
-        // send SMS code first
         this.phoneService.sendVerificationCode(
           this.selectedCountry,
           this.user.phone,
@@ -153,6 +170,7 @@ export class SignUpComponent implements OnInit {
   }
 
   prevStepWithSpinner() {
+    this.clearGlobalError();
     this.stepLoading = true;
     setTimeout(() => {
       this.step--;
@@ -161,37 +179,55 @@ export class SignUpComponent implements OnInit {
   }
 
   // ===== SUBMIT (SET PASSWORD) =====
-  OnSubmit(form: NgForm) {
-    if (!isPlatformBrowser(this.platformId)) return;
+OnSubmit(form: NgForm) {
+  if (!isPlatformBrowser(this.platformId)) return;
+  this.clearGlobalError();
 
-    this.passwordMismatch = this.user.password1 !== this.user.password2;
+  this.passwordMismatch = this.user.password1 !== this.user.password2;
+  if (this.passwordMismatch || this.user.password1.length < 6) {
+    this.passwordStrength.label = 'Too short';
+    this.strengthClass = 'weak';
+    return;
+  }
 
-    if (this.passwordMismatch || this.user.password1.length < 6) {
-      this.passwordStrength.label = 'Too short';
-      this.strengthClass = 'weak';
-      return;
-    }
+  this.loading = true;
 
-    this.loading = true;
-
-    // here your backend already knows which user (from OTP / session),
-    // we just set the password
+  if (this.useEmail) {
+    // EMAIL FLOW – single register request
+    this.userService.registerUser(this.user).subscribe({
+      next: (res: any) => {
+        const token = res?.token;
+        if (token && isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('userToken', token);
+        }
+        const target = this.getRedirectTarget();
+        window.location.href = target;
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Email register failed', err);
+        this.handleSetPasswordError(err); // reuse your global error handler
+      },
+    });
+  } else {
+    // PHONE FLOW – must be authenticated already and then call setPassword
     this.userService.setPassword(this.user.password1).subscribe({
       next: () => {
         const target = this.getRedirectTarget();
-        console.log('SIGNUP: password set, redirecting to', target);
         window.location.href = target;
       },
       error: (err) => {
         this.loading = false;
         console.error('Failed to set password:', err);
+        this.handleSetPasswordError(err);
       },
     });
   }
+}
+
 
   // ===== REDIRECT TARGET =====
   private getRedirectTarget(): string {
-    // 1️⃣ explicit return_url wins
     if (this.returnUrl) {
       try {
         return decodeURIComponent(this.returnUrl);
@@ -199,8 +235,14 @@ export class SignUpComponent implements OnInit {
         return this.returnUrl;
       }
     }
-    // 2️⃣ fallback to main site home
     return 'https://neetechs.com/en/';
+  }
+
+  // ===== ERROR HANDLING =====
+  private handleSetPasswordError(err: any): void {
+    const errorMessage = err?.error?.message || err?.message || 'An error occurred while setting password';
+    this.globalError = errorMessage;
+    console.error('Password error:', err);
   }
 
   // ===== VALIDATION =====
@@ -232,6 +274,4 @@ export class SignUpComponent implements OnInit {
     this.passwordStrength.label = result.label;
     this.strengthClass = result.strengthClass;
   }
-
-
 }

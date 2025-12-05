@@ -19,6 +19,21 @@
 
       <!-- Right Panel (Form) -->
       <div class="right-panel signup-container">
+        @if (globalError) {
+        <div class="global-error">
+          <div class="global-error-text">
+            <strong>Couldn’t finish signup</strong>
+            <p>{{ globalError }}</p>
+          </div>
+          <button
+            type="button"
+            class="global-error-dismiss"
+            (click)="clearGlobalError()"
+          >
+            ×
+          </button>
+        </div>
+        }
         @if (!stepLoading) {
         <form #signupForm="ngForm" (ngSubmit)="OnSubmit(signupForm)">
           <!-- STEP 1: Email or phone + consent -->
@@ -201,7 +216,7 @@
         <app-social-login-buttons></app-social-login-buttons>
         } @else {
         <div class="step-spinner">
-          <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading..." />
+          <img  src="https://i.imgur.com/llF5iyg.gif" alt="Loading..." />
         </div>
         }
       </div>
