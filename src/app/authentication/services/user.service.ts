@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { RuntimeConfigService } from "../../services/runtime-config.service";
 import { isPlatformBrowser } from "@angular/common";
+import { throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -38,13 +39,23 @@ registerUser(user: any) {
   userAuthentication(payload: { identifier: string; password: string }) {
     return this.http.post(this.config.serverUrl + "auth/login/", payload);
   }
- setPassword(password: string) {
+
+setPassword(password: string) {
   const token = isPlatformBrowser(this.platformId)
     ? localStorage.getItem("userToken")
     : null;
+
+  if (!token) {
+    console.error("setPassword called without auth token");
+    return throwError(() => ({
+      status: 401,
+      error: { detail: "No auth token. User is not logged in." },
+    }));
+  }
+
   const headers = new HttpHeaders({
-    "Authorization": `Token ${token}`,
-    "Content-Type": "application/json"
+    Authorization: `Token ${token}`,
+    "Content-Type": "application/json",
   });
 
   return this.http.post(
@@ -53,6 +64,7 @@ registerUser(user: any) {
     { headers }
   );
 }
+
 
 
   //getUserClaims(){
